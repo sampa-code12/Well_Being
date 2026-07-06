@@ -1,0 +1,50 @@
+.auth-page {
+  background-image: url('/logo/logo_Well_Being.jpeg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #f7f5ef;
+  min-height: 100vh;
+}
+
+.auth-main {
+  min-height: 100vh;
+  padding-top: 120px;
+}
+
+.auth-section {
+  background: transparent !important;
+}
+
+.auth-card {
+  background: #ffffff;
+  border: 1px solid rgba(23, 57, 19, 0.12);
+  box-shadow: 0 20px 45px rgba(23, 57, 19, 0.16);
+}
+
+.auth-card .card-body {
+  padding: 2rem 2rem 2.5rem;
+}
+
+.auth-card h2 {
+  color: var(--heading-color);
+}
+
+.auth-card .text-muted {
+  color: #6c757d !important;
+}
+
+.auth-btn {
+  background: var(--accent-gradient);
+  color: var(--contrast-color);
+  border: none;
+  border-radius: 999px;
+  padding: 0.8rem 1rem;
+  font-weight: 600;
+}
+
+.auth-btn:hover {
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 10%);
+}
