@@ -44,16 +44,52 @@
                 <p class="text-muted">Rejoignez Well-Being et participez à notre mission.</p>
               </div>
 
-              <form action="{{ url('/register') }}" method="post">
+              @if ($errors->any())
+                  <div class="alert alert-danger rounded-3">
+                      <ul class="mb-0 ps-3">
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+              @endif
+
+              @if (session('succes'))
+                  <div class="alert alert-success rounded-3">
+                      {{ session('succes') }}
+                  </div>
+              @endif
+
+              <form action="{{ route('register.post') }}" method="post">
                 @csrf
                 <div class="row g-3">
                   <div class="col-md-6">
-                    <label for="name" class="form-label">Nom complet</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+                    <label for="nom" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" value="{{ old('nom') }}" required>
                   </div>
                   <div class="col-md-6">
+                    <label for="prenom" class="form-label">Prénom</label>
+                    <input type="text" class="form-control" id="prenom" name="prenom" value="{{ old('prenom') }}" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="tel" class="form-label">Téléphone</label>
+                    <input type="text" class="form-control" id="tel" name="tel" value="{{ old('tel') }}" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="profession" class="form-label">Profession</label>
+                    <input type="text" class="form-control" id="profession" name="profession" value="{{ old('profession') }}" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="pays" class="form-label">Pays</label>
+                    <input type="text" class="form-control" id="pays" name="pays" value="{{ old('pays') }}" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="ville" class="form-label">Ville</label>
+                    <input type="text" class="form-control" id="ville" name="ville" value="{{ old('ville') }}" required>
+                  </div>
+                  <div class="col-md-12">
                     <label for="email" class="form-label">Adresse email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
                   </div>
                   <div class="col-md-6">
                     <label for="password" class="form-label">Mot de passe</label>

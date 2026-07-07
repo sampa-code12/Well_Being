@@ -25,7 +25,7 @@ class AvisController extends Controller
         Avis::create([
             'contenu'=>$request->contenu,
             'user_id'=>auth()->user()->idUser,
-            'StatusModeration'=>StatusAvis::VISIBLE,
+            'StatusModeration'=>StatutAvis::VISIBLE,
         ]);
 
         return redirect()->route('avis.list')->with('succes','avis envoye avec succes');
@@ -47,6 +47,6 @@ class AvisController extends Controller
 
     public function  verifierDelaiModifAvis(Avis $avis):bool
     {
-        return $avis->dateCreation->addMinutes(15)->greatherThan(now());
+        return $avis->created_at->addMinutes(15)->greatherThan(now());
     }
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id('idService');
-            $table->foreignId('user_id')->constrained()->references('idUser')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->references('idUser')->on('users')->onDelete('cascade');
             $table->string('titre');
             $table->string('description');
             $table->string('image_url')->nullable();

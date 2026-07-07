@@ -49,7 +49,7 @@
       </nav>
 
       @guest
-      <a class="btn-getstarted" href="{{ route('login') }}">Connexion</a>
+      <a class="btn-getstarted" href="{{ route('login.form') }}">Connexion</a>
       @endguest
       @auth
       <a class="btn-getstarted" href="{{ url('/') }}">Mon espace</a>
@@ -59,6 +59,11 @@
   </header>
 
   <main class="main">
+    @if(session('success'))
+    <div class="container mt-4">
+      <div class="alert alert-success">{{ session('success') }}</div>
+    </div>
+    @endif
 
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
@@ -70,8 +75,8 @@
             <p>Well-Being est une association engagée pour accompagner chacun vers un mieux-être physique, mental et social, à travers des services adaptés et une communauté solidaire.</p>
             @guest
             <div class="d-flex">
-              <a href="{{ route('register') }}" class="btn-get-started me-2">Créer un compte</a>
-              <a href="{{ route('login') }}" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Se connecter</span></a>
+              <a href="{{ route('register.form') }}" class="btn-get-started me-2">Créer un compte</a>
+              <a href="{{ route('login.form') }}" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Se connecter</span></a>
             </div>
             @endguest
             @auth

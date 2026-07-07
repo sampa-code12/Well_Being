@@ -18,7 +18,7 @@ class Avis extends Model
     protected function casts():array
     {
         return [
-            'StatusModeration'=>StatusAvis::class
+            'StatusModeration'=>StatutAvis::class
         ];
     }
 

@@ -14,5 +14,7 @@ class Service extends Model
         'image_url'
     ];
 
-    
+    public function demande_services(){
+        return $this->BelongsToMany(DemandeService::class, 'idDmdeService');
+    }
 }

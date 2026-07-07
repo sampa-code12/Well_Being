@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum StatusAvis:string
+enum StatutAvis:string
 {
     case VISIBLE = 'visible';
     case MASQUEE = 'masquée';

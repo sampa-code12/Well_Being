@@ -44,11 +44,33 @@
                 <p class="text-muted">Accédez à votre espace Well-Being.</p>
               </div>
 
-              <form action="{{ url('/login') }}" method="post">
+              @if ($errors->any())
+                  <div class="alert alert-danger rounded-3">
+                      <ul class="mb-0 ps-3">
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+              @endif
+
+              @if (session('message'))
+                  <div class="alert alert-warning rounded-3">
+                      {{ session('message') }}
+                  </div>
+              @endif
+
+              @if (session('succes'))
+                  <div class="alert alert-success rounded-3">
+                      {{ session('succes') }}
+                  </div>
+              @endif
+
+              <form action="{{ route('login.post') }}" method="post">
                 @csrf
                 <div class="mb-3">
                   <label for="email" class="form-label">Adresse email</label>
-                  <input type="email" class="form-control" id="email" name="email" required>
+                  <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
                 </div>
 
                 <div class="mb-3">
@@ -57,7 +79,7 @@
                 </div>
 
                 <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" id="remember">
+                  <input class="form-check-input" type="checkbox" id="remember" name="remember">
                   <label class="form-check-label" for="remember">Se souvenir de moi</label>
                 </div>
 
@@ -65,7 +87,7 @@
               </form>
 
               <div class="text-center mt-3">
-                <p class="mb-0">Pas encore membre ? <a href="{{ url('/register') }}">Créer un compte</a></p>
+                <p class="mb-0">Pas encore membre ? <a href="{{ url('/register-form') }}">Créer un compte</a></p>
               </div>
             </div>
           </div>

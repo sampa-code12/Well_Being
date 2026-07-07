@@ -28,10 +28,11 @@ class User extends Authenticatable
         'prenom',
         'tel',
         'pays',
-        'vile',
+        'ville',
         'profession',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -68,8 +69,14 @@ class User extends Authenticatable
         return $this->role == Role::MEMBRE;
     }
 
-    public function avis(){
-        return $this->hasMany(Avis::class,'idAvis');
+    public function avis()
+    {
+        return $this->hasMany(Avis::class, 'user_id', 'idUser');
+    }
+
+    public function demande_services()
+    {
+        return $this->hasMany(DemandeService::class, 'user_id', 'idUser');
     }
 }
 
