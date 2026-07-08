@@ -18,6 +18,10 @@ class AvisController extends Controller
     }
 
     public function creerAvis(Request $request){
+        if (!\App\Models\SystemSetting::getBool('avis_enabled', true)) {
+            return redirect()->route('avis.list')->with('error','Les avis sont momentanément désactivés par l’administrateur.');
+        }
+
         $request->validate([
             'contenu'=>'required|string|min:20',
         ]);

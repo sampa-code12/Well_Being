@@ -52,47 +52,11 @@
       <a class="btn-getstarted" href="{{ route('login.form') }}">Connexion</a>
       @endguest
       @auth
-      <a class="btn-getstarted" href="{{ url('/') }}">Mon espace</a>
+      <a class="btn-getstarted" href="{{ route('membre.dashboard') }}">Mon espace</a>
       @endauth
 
     </div>
   </header>
-
-  <main class="main">
-    @if(session('success'))
-    <div class="container mt-4">
-      <div class="alert alert-success">{{ session('success') }}</div>
-    </div>
-    @endif
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
-
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
-            <h1>Cultivons ensemble le bien-être, l'épanouissement et la solidarité</h1>
-            <p>Well-Being est une association engagée pour accompagner chacun vers un mieux-être physique, mental et social, à travers des services adaptés et une communauté solidaire.</p>
-            @guest
-            <div class="d-flex">
-              <a href="{{ route('register.form') }}" class="btn-get-started me-2">Créer un compte</a>
-              <a href="{{ route('login.form') }}" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Se connecter</span></a>
-            </div>
-            @endguest
-            @auth
-            <div class="d-flex">
-              <a href="{{ url('/services') }}" class="btn-get-started me-2">Découvrir nos services</a>
-              <a href="{{ url('/contact') }}" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Nous contacter</span></a>
-            </div>
-            @endauth
-          </div>
-          <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
-            <img src="{{ asset('logo/logo_well_being.jpeg') }}" class="img-fluid animated" alt="">
-          </div>
-        </div>
-      </div>
-
-    </section><!-- /Hero Section -->
 
     <!-- Clients Section -->
     <section id="clients" class="clients section light-background">
@@ -259,39 +223,21 @@
       <div class="container">
 
         <div class="row gy-4">
-
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
+          @forelse($services as $service)
+          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="{{ 100 + $loop->index * 100 }}">
             <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-heart-pulse icon"></i></div>
-              <h4><a href="" class="stretched-link">Accompagnement bien-être</a></h4>
-              <p>Un suivi personnalisé pour vous aider à retrouver équilibre et sérénité au quotidien.</p>
+              @if($service->image_url)
+                <img src="{{ asset($service->image_url) }}" alt="{{ $service->titre }}" class="img-fluid mb-3 rounded" style="height: 180px; object-fit: cover; width: 100%;">
+              @endif
+              <h4><a href="{{ route('services.show', $service) }}" class="stretched-link">{{ $service->titre }}</a></h4>
+              <p>{{ Str::limit($service->description, 120) }}</p>
             </div>
           </div><!-- End Service Item -->
-
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-people icon"></i></div>
-              <h4><a href="" class="stretched-link">Groupes de parole & entraide</a></h4>
-              <p>Des espaces d'échange bienveillants animés par notre équipe et nos membres.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-mortarboard icon"></i></div>
-              <h4><a href="" class="stretched-link">Ateliers & sensibilisation</a></h4>
-              <p>Des ateliers thématiques pour informer, sensibiliser et outiller notre communauté.</p>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item position-relative">
-              <div class="icon"><i class="bi bi-hand-thumbs-up icon"></i></div>
-              <h4><a href="" class="stretched-link">Devenir partenaire</a></h4>
-              <p>Rejoignez nos partenaires piliers et contribuez activement à notre mission.</p>
-            </div>
-          </div><!-- End Service Item -->
-
+          @empty
+          <div class="col-12">
+            <div class="alert alert-info">Aucun service disponible pour le moment.</div>
+          </div>
+          @endforelse
         </div>
 
       </div>

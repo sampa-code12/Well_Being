@@ -27,6 +27,7 @@
             </div>
         </div>
         <nav class="nav flex-column">
+            <a class="nav-link" href="{{ url('/') }}"><i class="bi bi-house-door"></i> Retour à l’accueil</a>
             <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="bi bi-grid"></i> Tableau de bord</a>
             <a class="nav-link active" href="{{ route('admin.profile') }}"><i class="bi bi-person-circle"></i> Profil</a>
             <a class="nav-link" href="{{ route('admin.users') }}"><i class="bi bi-people"></i> Utilisateurs</a>
@@ -34,6 +35,10 @@
             <a class="nav-link" href="{{ route('admin.avis') }}"><i class="bi bi-chat-left-text"></i> Avis</a>
             <a class="nav-link" href="{{ route('admin.settings') }}"><i class="bi bi-gear"></i> Paramètres</a>
         </nav>
+        <form method="POST" action="{{ route('logout') }}" class="mt-2">
+            @csrf
+            <button type="submit" class="nav-link btn btn-link text-start p-0"><i class="bi bi-box-arrow-right"></i> Se déconnecter</button>
+        </form>
     </aside>
     <main class="main-panel">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -44,25 +49,51 @@
             <a href="{{ url('/') }}" class="btn btn-outline-success">Retour au site</a>
         </div>
         <div class="card-soft p-4">
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <h5 class="mb-3">Informations du compte</h5>
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label class="form-label">Nom</label>
-                    <input type="text" class="form-control" value="{{ auth()->user()->nom ?? 'Admin' }}" disabled>
+            <form method="POST" action="{{ route('admin.profile.update') }}">
+                @csrf
+                @method('PUT')
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Nom</label>
+                        <input type="text" name="nom" class="form-control" value="{{ old('nom', auth()->user()->nom ?? 'Admin') }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Prénom</label>
+                        <input type="text" name="prenom" class="form-control" value="{{ old('prenom', auth()->user()->prenom ?? 'Well-Being') }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" value="{{ old('email', auth()->user()->email ?? '') }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Nouveau mot de passe</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Confirmer le mot de passe</label>
+                        <input type="password" name="password_confirmation" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Rôle</label>
+                        <input type="text" class="form-control" value="Administrateur" disabled>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label class="form-label">Prénom</label>
-                    <input type="text" class="form-control" value="{{ auth()->user()->prenom ?? 'Well-Being' }}" disabled>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" value="{{ auth()->user()->email ?? '' }}" disabled>
-                </div>
-                <div class="col-md-6">
-                    <label class="form-label">Rôle</label>
-                    <input type="text" class="form-control" value="Administrateur" disabled>
-                </div>
-            </div>
+                <button type="submit" class="btn btn-success mt-4">Enregistrer</button>
+            </form>
         </div>
     </main>
 </div>

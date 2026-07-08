@@ -81,8 +81,48 @@
                 </button>
             </div>
         </div>
+        <div class="card-soft p-4 mb-4">
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+            <form method="POST" action="{{ route('membre.messages.send') }}">
+                @csrf
+                <div class="mb-3">
+                    <label for="contenu" class="form-label">Nouveau message</label>
+                    <textarea id="contenu" name="contenu" class="form-control" rows="4" required>{{ old('contenu') }}</textarea>
+                    @error('contenu')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+
         <div class="card-soft p-4">
-            <p class="text-muted">Les messages reçus et envoyés pourront être affichés ici.</p>
+            <h5 class="mb-3">Historique des messages</h5>
+            @if($messages->isEmpty())
+                <p class="text-muted">Aucun message envoyé pour le moment.</p>
+            @else
+                <div class="list-group">
+                    @foreach($messages as $message)
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-start gap-3">
+                                <div>
+                                    <p class="mb-1">{{ $message->contenu }}</p>
+                                    <small class="text-muted">Envoyé le {{ $message->created_at->format('d/m/Y H:i') }}</small>
+                                </div>
+                                <span class="badge bg-success">{{ ucfirst($message->envoye_par) }}</span>
+                            </div>
+                            @if(!empty($message->reponse))
+                                <div class="border rounded p-3 mt-3 bg-success-subtle">
+                                    <div class="fw-semibold text-success">Réponse de l’administration</div>
+                                    <p class="mb-0">{{ $message->reponse }}</p>
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </main>
 </div>

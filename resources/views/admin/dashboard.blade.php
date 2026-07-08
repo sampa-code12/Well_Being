@@ -158,13 +158,20 @@
             </div>
 
             <nav class="nav flex-column">
-                <a class="nav-link active" href="#"><i class="bi bi-grid"></i> Tableau de bord</a>
-                <a class="nav-link" href="#"><i class="bi bi-person-circle"></i> Profil</a>
-                <a class="nav-link" href="#"><i class="bi bi-people"></i> Utilisateurs</a>
-                <a class="nav-link" href="#"><i class="bi bi-heart-pulse"></i> Services</a>
-                <a class="nav-link" href="#"><i class="bi bi-chat-left-text"></i> Avis & messages</a>
-                <a class="nav-link" href="#"><i class="bi bi-gear"></i> Paramètres</a>
+                <a class="nav-link" href="{{ url('/') }}"><i class="bi bi-house-door"></i> Retour à l’accueil</a>
+                <a class="nav-link active" href="{{ route('admin.dashboard') }}"><i class="bi bi-grid"></i> Tableau de bord</a>
+                <a class="nav-link" href="{{ route('admin.profile') }}"><i class="bi bi-person-circle"></i> Profil</a>
+                <a class="nav-link" href="{{ route('admin.users') }}"><i class="bi bi-people"></i> Utilisateurs</a>
+                <a class="nav-link" href="{{ route('admin.services.index') }}"><i class="bi bi-heart-pulse"></i> Services</a>
+                <a class="nav-link" href="{{ route('admin.avis') }}"><i class="bi bi-chat-left-text"></i> Avis</a>
+                <a class="nav-link" href="{{ route('admin.messages') }}"><i class="bi bi-envelope"></i> Messages</a>
+                <a class="nav-link" href="{{ route('admin.settings') }}"><i class="bi bi-gear"></i> Paramètres</a>
             </nav>
+
+            <form method="POST" action="{{ route('logout') }}" class="mt-2">
+                @csrf
+                <button type="submit" class="nav-link btn btn-link text-start p-0"><i class="bi bi-box-arrow-right"></i> Se déconnecter</button>
+            </form>
 
             <div class="mt-auto p-2 rounded-3" style="background: rgba(255,255,255,0.12);">
                 <small>Vue de référence</small>
@@ -206,15 +213,15 @@
                     <div class="stat-card">
                         <div class="icon"><i class="bi bi-people"></i></div>
                         <h6 class="mb-1">Utilisateurs</h6>
-                        <h3 class="mb-0">128</h3>
-                        <small class="text-muted">Membres enregistrés</small>
+                        <h3 class="mb-0">{{ $totalUsers }}</h3>
+                        <small class="text-muted">{{ $totalMembers }} membres · {{ $totalAdmins }} admins</small>
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-3">
                     <div class="stat-card">
                         <div class="icon"><i class="bi bi-heart-pulse"></i></div>
                         <h6 class="mb-1">Services</h6>
-                        <h3 class="mb-0">12</h3>
+                        <h3 class="mb-0">{{ $totalServices }}</h3>
                         <small class="text-muted">Offres actives</small>
                     </div>
                 </div>
@@ -222,16 +229,16 @@
                     <div class="stat-card">
                         <div class="icon"><i class="bi bi-chat-left-text"></i></div>
                         <h6 class="mb-1">Avis</h6>
-                        <h3 class="mb-0">46</h3>
-                        <small class="text-muted">Commentaires récents</small>
+                        <h3 class="mb-0">{{ $totalAvis }}</h3>
+                        <small class="text-muted">Commentaires recensés</small>
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-3">
                     <div class="stat-card">
-                        <div class="icon"><i class="bi bi-bell"></i></div>
-                        <h6 class="mb-1">Notifications</h6>
-                        <h3 class="mb-0">8</h3>
-                        <small class="text-muted">À traiter</small>
+                        <div class="icon"><i class="bi bi-envelope"></i></div>
+                        <h6 class="mb-1">Messages</h6>
+                        <h3 class="mb-0">{{ $totalMessages }}</h3>
+                        <small class="text-muted">Communications reçues</small>
                     </div>
                 </div>
             </div>
@@ -239,31 +246,36 @@
             <div class="row g-4">
                 <div class="col-lg-7">
                     <div class="panel-card">
-                        <h5 class="mb-3">Actions rapides</h5>
+                        <h5 class="mb-3">Nouveaux utilisateurs</h5>
                         <div class="list-group list-group-flush">
-                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>Gérer les comptes membres</span>
-                                <button class="btn btn-sm btn-outline-success">Ouvrir</button>
-                            </div>
-                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>Valider les services proposés</span>
-                                <button class="btn btn-sm btn-outline-success">Ouvrir</button>
-                            </div>
-                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                <span>Consulter les avis publiés</span>
-                                <button class="btn btn-sm btn-outline-success">Ouvrir</button>
-                            </div>
+                            @forelse($recentUsers as $recentUser)
+                                <div class="list-group-item d-flex justify-content-between align-items-start gap-3">
+                                    <div>
+                                        <div class="fw-semibold">{{ $recentUser->prenom }} {{ $recentUser->nom }}</div>
+                                        <small class="text-muted">{{ $recentUser->email }} · {{ ucfirst($recentUser->role->value ?? $recentUser->role) }}</small>
+                                    </div>
+                                    <span class="badge bg-success-subtle text-success">{{ $recentUser->created_at->format('d/m') }}</span>
+                                </div>
+                            @empty
+                                <div class="text-muted">Aucun nouvel utilisateur enregistré récemment.</div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="panel-card">
-                        <h5 class="mb-3">Activités récentes</h5>
-                        <ul class="list-unstyled mb-0">
-                            <li class="d-flex justify-content-between py-2 border-bottom"><span>Nouvelle demande d’adhésion</span><small class="text-muted">Il y a 10 min</small></li>
-                            <li class="d-flex justify-content-between py-2 border-bottom"><span>Mise à jour du service bien-être</span><small class="text-muted">Il y a 1 h</small></li>
-                            <li class="d-flex justify-content-between py-2"><span>Nouveau commentaire publié</span><small class="text-muted">Aujourd’hui</small></li>
-                        </ul>
+                        <h5 class="mb-3">Derniers messages reçus</h5>
+                        <div class="list-group list-group-flush">
+                            @forelse($recentMessages as $recentMessage)
+                                <div class="list-group-item">
+                                    <div class="fw-semibold text-break-all">{{ $recentMessage->user?->prenom ?? 'Inconnu' }} {{ $recentMessage->user?->nom ?? '' }}</div>
+                                    <small class="text-muted">{{ $recentMessage->created_at->format('d/m/Y H:i') }}</small>
+                                    <p class="mb-0 mt-2">{{ \Illuminate\Support\Str::limit($recentMessage->contenu, 100) }}</p>
+                                </div>
+                            @empty
+                                <div class="text-muted">Aucun message reçu pour le moment.</div>
+                            @endforelse
+                        </div>
                     </div>
                 </div>
             </div>

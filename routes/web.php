@@ -4,10 +4,11 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AvisController;
 use App\Http\Controllers\DemandeServiceController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ServiceController;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Service;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 
 //ROUTES INSCRIPTION
@@ -16,12 +17,14 @@ Route::post('/register', [RegisterController::class ,'register'])->name('registe
 
 //ROUTE AUTHENTIFICATION
 Route::post('/login-form', [LoginController::class,'login'])->name('login.post');
-Route::get('/login', [LoginController::class,'LoginForm'])->name('login.form');
+Route::get('/login-form', [LoginController::class,'LoginForm'])->name('login.form');
+Route::get('/login', [LoginController::class,'LoginForm'])->name('login');
 
 
 
 Route::get('/', function () {
-    return view('index');
+    $services = Service::latest()->take(4)->get();
+    return view('index', compact('services'));
 });
 
 Route::get('/apropos', function () {
@@ -37,141 +40,40 @@ Route::get('/services', [ServiceController::class, 'AfficherTousServices'])->nam
 Route::get('/services/{service}', [ServiceController::class, 'AfficherDetailService'])->name('services.show');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+    Route::put('/admin/profile', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::delete('/admin/users/{user}', [AdminController::class, 'destroy'])->name('admin.users.destroy');
+    Route::get('/admin/avis', [AdminController::class, 'avis'])->name('admin.avis');
+    Route::get('/admin/messages', [AdminController::class, 'messages'])->name('admin.messages');
+    Route::post('/admin/messages/{message}/reply', [AdminController::class, 'replyMessage'])->name('admin.messages.reply');
+    Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
+    Route::post('/admin/settings', [AdminController::class, 'saveSettings'])->name('admin.settings.save');
 
-    Route::get('/admin/profile', function () {
-        return view('admin.profile');
-    })->name('admin.profile');
-
-    Route::get('/admin/users', function () {
-        return view('admin.users');
-    })->name('admin.users');
-
-    Route::get('/admin/services', [ServiceController::class, 'AfficherTousServices'])->name('admin.services.index');
+    Route::get('/admin/services', function () {
+        $services = Service::all();
+        return view('admin.services.index', compact('services'));
+    })->name('admin.services.index');
     Route::get('/admin/services/creer', function () {
         return view('admin.services.create');
     })->name('admin.services.create');
     Route::post('/admin/services', [ServiceController::class, 'CreerService'])->name('admin.services.store');
-    Route::get('/admin/services/{service}/edit', function () {
-        return view('admin.services.edit');
+    Route::get('/admin/services/{service}/edit', function (Service $service) {
+        return view('admin.services.edit', compact('service'));
     })->name('admin.services.edit');
     Route::put('/admin/services/{service}', [ServiceController::class, 'MettreAjourService'])->name('admin.services.update');
     Route::delete('/admin/services/{service}', [ServiceController::class, 'SupprimerService'])->name('admin.services.destroy');
 
-    Route::get('/admin/avis', function () {
-        return view('admin.avis');
-    })->name('admin.avis');
-
-    Route::get('/admin/settings', function () {
-        return view('admin.settings');
-    })->name('admin.settings');
-
-    Route::get('/membre/dashboard', function () {
-        $user = Auth::user();
-
-        if (! $user || ! $user->estMembre()) {
-            abort(403);
-        }
-
-        $demandes = $user->demande_services()->with('services')->latest('dateCommande')->take(5)->get();
-        $avis = $user->avis()->latest()->take(5)->get();
-        $servicesDisponibles = \App\Models\Service::count();
-        $demandesEnAttente = $user->demande_services()->where('statut_demande', 'en_attente')->count();
-        $demandesTraites = $user->demande_services()->whereIn('statut_demande', ['recu', 'en_traitement', 'accepte'])->count();
-
-        return view('membre.dashboard', compact(
-            'user',
-            'demandes',
-            'avis',
-            'servicesDisponibles',
-            'demandesEnAttente',
-            'demandesTraites'
-        ));
-    })->name('membre.dashboard');
-
-    Route::get('/membre/profile', function () {
-        $user = Auth::user();
-
-        if (! $user || ! $user->estMembre()) {
-            abort(403);
-        }
-
-        return view('membre.profile', compact('user'));
-    })->name('membre.profile');
-
-    Route::get('/membre/profile/edit', function () {
-        $user = Auth::user();
-
-        if (! $user || ! $user->estMembre()) {
-            abort(403);
-        }
-
-        return view('membre.profile_edit', compact('user'));
-    })->name('membre.profile.edit');
-
-    Route::put('/membre/profile', function (Request $request) {
-        $user = Auth::user();
-
-        if (! $user || ! $user->estMembre()) {
-            abort(403);
-        }
-
-        $data = $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . $user->idUser . ',idUser',
-            'tel' => 'nullable|string|max:30',
-            'profession' => 'nullable|string|max:255',
-            'ville' => 'nullable|string|max:255',
-            'pays' => 'nullable|string|max:255',
-            'password' => 'nullable|string|min:8|confirmed',
-        ]);
-
-        if (empty($data['password'])) {
-            unset($data['password']);
-        } else {
-            $data['password'] = \Illuminate\Support\Facades\Hash::make($data['password']);
-        }
-
-        $user->fill($data);
-        $user->save();
-
-        return redirect()->route('membre.profile')->with('success', 'Profil mis à jour.');
-    })->name('membre.profile.update');
-
-    Route::get('/membre/services', function () {
-        $user = Auth::user();
-
-        if (! $user || ! $user->estMembre()) {
-            abort(403);
-        }
-
-        $services = $user->demande_services()->with('services')->latest('dateCommande')->get();
-
-        return view('membre.services', compact('user', 'services'));
-    })->name('membre.services');
-
-    Route::get('/membre/messages', function () {
-        return view('membre.messages');
-    })->name('membre.messages');
-
-    Route::get('/membre/favorites', function () {
-        return view('membre.favorites');
-    })->name('membre.favorites');
-
-    Route::post('/logout', function (Request $request) {
-        $user = Auth::user();
-
-        if ($user) {
-            Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-        }
-
-        return redirect('/')->with('success', 'Vous êtes déconnecté.');
-    })->name('logout');
+    Route::get('/membre/dashboard', [MemberController::class, 'dashboard'])->name('membre.dashboard');
+    Route::get('/membre/profile', [MemberController::class, 'profile'])->name('membre.profile');
+    Route::get('/membre/profile/edit', [MemberController::class, 'editProfile'])->name('membre.profile.edit');
+    Route::put('/membre/profile', [MemberController::class, 'updateProfile'])->name('membre.profile.update');
+    Route::get('/membre/services', [MemberController::class, 'services'])->name('membre.services');
+    Route::get('/membre/messages', [MemberController::class, 'messages'])->name('membre.messages');
+    Route::post('/membre/messages', [MemberController::class, 'sendMessage'])->name('membre.messages.send');
+    Route::get('/membre/favorites', [MemberController::class, 'favorites'])->name('membre.favorites');
+    Route::post('/logout', [MemberController::class, 'logout'])->name('logout');
 
     // Avis
     Route::get('/avis', [AvisController::class, 'listeAvis'])->name('avis.list');

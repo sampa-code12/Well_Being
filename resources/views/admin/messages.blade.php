@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name') }} - Avis</title>
+    <title>{{ config('app.name') }} - Messages</title>
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <style>
@@ -14,6 +14,8 @@
         .sidebar .nav-link.active, .sidebar .nav-link:hover { background: rgba(255,255,255,0.16); color: white; }
         .main-panel { flex: 1; padding: 24px; }
         .card-soft { background: white; border-radius: 18px; box-shadow: 0 8px 25px rgba(0,0,0,0.04); border: 1px solid #e7e7e7; }
+        .message-card { margin-bottom: 18px; border-radius: 16px; border: 1px solid #e7e7e7; }
+        .message-card .card-body { padding: 18px; }
     </style>
 </head>
 <body>
@@ -32,7 +34,8 @@
             <a class="nav-link" href="{{ route('admin.profile') }}"><i class="bi bi-person-circle"></i> Profil</a>
             <a class="nav-link" href="{{ route('admin.users') }}"><i class="bi bi-people"></i> Utilisateurs</a>
             <a class="nav-link" href="{{ route('admin.services.index') }}"><i class="bi bi-heart-pulse"></i> Services</a>
-            <a class="nav-link active" href="{{ route('admin.avis') }}"><i class="bi bi-chat-left-text"></i> Avis</a>
+            <a class="nav-link" href="{{ route('admin.avis') }}"><i class="bi bi-chat-left-text"></i> Avis</a>
+            <a class="nav-link active" href="{{ route('admin.messages') }}"><i class="bi bi-envelope"></i> Messages</a>
             <a class="nav-link" href="{{ route('admin.settings') }}"><i class="bi bi-gear"></i> Paramètres</a>
         </nav>
         <form method="POST" action="{{ route('logout') }}" class="mt-2">
@@ -43,30 +46,47 @@
     <main class="main-panel">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2 class="mb-1">Gestion des avis</h2>
-                <p class="text-muted mb-0">Modérez les avis et commentaires publiés.</p>
+                <h2 class="mb-1">Messages de la plateforme</h2>
+                <p class="text-muted mb-0">Consultez toutes les communications envoyées par les membres et suivez les échanges.</p>
             </div>
             <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-success">Retour</a>
         </div>
-        <div class="card-soft p-4">
-            <h5 class="mb-3">Avis récents</h5>
-            @if($avis->isEmpty())
-                <p class="text-muted">Aucun avis n’a encore été publié.</p>
+
+        <div class="card-soft p-4 mb-4">
+            <h5 class="mb-3">Flux de messages</h5>
+            @if($messages->isEmpty())
+                <div class="text-muted">Aucun message n’a encore été reçu.</div>
             @else
-                <div class="list-group list-group-flush">
-                    @foreach($avis as $item)
-                        <div class="list-group-item">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
+                @foreach($messages as $message)
+                    <div class="message-card bg-white mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2 gap-3">
                                 <div>
-                                    <strong>{{ $item->user?->prenom ?? 'Utilisateur' }} {{ $item->user?->nom ?? '' }}</strong>
-                                    <div class="text-muted small">{{ $item->created_at->format('d/m/Y H:i') }}</div>
+                                    <h6 class="mb-1">{{ $message->user?->prenom ?? 'Utilisateur inconnu' }} {{ $message->user?->nom ?? '' }}</h6>
+                                    <small class="text-muted">{{ $message->created_at->format('d/m/Y H:i') }}</small>
                                 </div>
-                                <span class="badge bg-success-subtle text-success">{{ $item->StatusModeration }}</span>
+                                <span class="badge bg-success-subtle text-success">{{ ucfirst(str_replace('_', ' ', $message->envoye_par)) }}</span>
                             </div>
-                            <p class="mb-0">{{ $item->contenu }}</p>
+                            <div class="border rounded p-3 bg-light mt-3">
+                                <div class="fw-semibold text-dark">Message du membre</div>
+                                <p class="mb-0">{{ $message->contenu }}</p>
+                            </div>
+                            @if(!empty($message->reponse))
+                                <div class="border rounded p-3 mt-3 bg-success-subtle">
+                                    <div class="fw-semibold text-success">Réponse envoyée</div>
+                                    <p class="mb-0">{{ $message->reponse }}</p>
+                                </div>
+                            @else
+                                <form method="POST" action="{{ route('admin.messages.reply', $message) }}" class="mt-3">
+                                    @csrf
+                                    <label class="form-label">Répondre</label>
+                                    <textarea name="reponse" class="form-control" rows="3" placeholder="Écrivez une réponse au membre..."></textarea>
+                                    <button type="submit" class="btn btn-success mt-2">Envoyer</button>
+                                </form>
+                            @endif
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
             @endif
         </div>
     </main>

@@ -1,0 +1,10 @@
+node_modules
+vendor
+.git
+.gitignore
+.env
+.env.local
+.env.*
+storage/logs/*
+public/storage
+npm-debug.log

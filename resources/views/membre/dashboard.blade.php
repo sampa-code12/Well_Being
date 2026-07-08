@@ -71,12 +71,14 @@
                 <a class="nav-link active" href="{{ route('membre.dashboard') }}"><i class="bi bi-grid"></i> Mon espace</a>
                 <a class="nav-link" href="{{ route('membre.profile') }}"><i class="bi bi-person-circle"></i> Mon profil</a>
                 <a class="nav-link" href="{{ route('membre.services') }}"><i class="bi bi-heart-pulse"></i> Mes services</a>
-                <a class="nav-link" href="#"><i class="bi bi-chat-left-text"></i> Mes messages</a>
-                <a class="nav-link" href="#"><i class="bi bi-bookmark"></i> Mes favoris</a>
+                <a class="nav-link" href="{{ route('membre.messages') }}"><i class="bi bi-chat-left-text"></i> Mes messages</a>
+                <a class="nav-link" href="{{ route('membre.favorites') }}"><i class="bi bi-bookmark"></i> Mes favoris</a>
+                <a class="nav-link" href="{{ url('/') }}"><i class="fa fa-home"></i> Retour a l'accueil</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="nav-link btn btn-link text-start p-0"><i class="bi bi-box-arrow-right"></i> Se déconnecter</button>
                 </form>
+                
             </nav>
         </aside>
 
@@ -189,6 +191,31 @@
                             @endforelse
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="panel-card mt-4">
+                <h5 class="mb-3">Vos derniers messages</h5>
+                <div class="list-group list-group-flush">
+                    @forelse ($messages as $message)
+                        <div class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-start gap-3">
+                                <div class="text-break-all">
+                                    <div class="fw-semibold">{{ $message->contenu }}</div>
+                                    <small class="text-muted">Envoyé le {{ $message->created_at->format('d/m/Y H:i') }}</small>
+                                </div>
+                                <span class="badge bg-success">{{ ucfirst($message->envoye_par) }}</span>
+                            </div>
+                            @if(!empty($message->reponse))
+                                <div class="mt-3 border rounded p-3 bg-light">
+                                    <div class="fw-semibold text-success">Réponse de l’administration</div>
+                                    <div class="mt-1 text-break-all">{{ $message->reponse }}</div>
+                                </div>
+                            @endif
+                        </div>
+                    @empty
+                        <div class="text-muted">Aucun message envoyé pour le moment.</div>
+                    @endforelse
                 </div>
             </div>
         </main>

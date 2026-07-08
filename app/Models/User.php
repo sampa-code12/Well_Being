@@ -78,5 +78,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(DemandeService::class, 'user_id', 'idUser');
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'user_id', 'idUser');
+    }
 }
 
