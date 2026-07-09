@@ -72,6 +72,7 @@
                 <a class="nav-link" href="{{ route('membre.profile') }}"><i class="bi bi-person-circle"></i> Mon profil</a>
                 <a class="nav-link" href="{{ route('membre.services') }}"><i class="bi bi-heart-pulse"></i> Mes services</a>
                 <a class="nav-link" href="{{ route('membre.messages') }}"><i class="bi bi-chat-left-text"></i> Mes messages</a>
+                <a class="nav-link" href="#avisFormCollapse" data-bs-toggle="collapse" aria-expanded="false" aria-controls="avisFormCollapse"><i class="bi bi-pencil-square"></i> Publier un avis</a>
                 <a class="nav-link" href="{{ route('membre.favorites') }}"><i class="bi bi-bookmark"></i> Mes favoris</a>
                 <a class="nav-link" href="{{ url('/') }}"><i class="fa fa-home"></i> Retour a l'accueil</a>
                 <form method="POST" action="{{ route('logout') }}">
@@ -194,6 +195,41 @@
                 </div>
             </div>
 
+            <div class="panel-card mt-4" id="create-avis">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">Publier un avis</h5>
+                    <a class="btn btn-outline-success btn-sm" data-bs-toggle="collapse" href="#avisFormCollapse" role="button" aria-expanded="false" aria-controls="avisFormCollapse">
+                        <i class="bi bi-plus-circle"></i> Ouvrir
+                    </a>
+                </div>
+
+                <div class="accordion" id="avisAccordion">
+                    <div class="accordion-item border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#avisFormCollapse" aria-expanded="false" aria-controls="avisFormCollapse">
+                                Partager votre expérience
+                            </button>
+                        </h2>
+                        <div id="avisFormCollapse" class="accordion-collapse collapse" data-bs-parent="#avisAccordion">
+                            <div class="accordion-body px-0">
+                                <form action="{{ route('avis.store') }}" method="POST">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="contenu" class="form-label">Votre avis</label>
+                                        <textarea name="contenu" id="contenu" rows="5" class="form-control" required placeholder="Décrivez votre expérience avec nos services..."></textarea>
+                                    </div>
+                                    <input type="hidden" name="redirect_to" value="{{ url()->current() }}">
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn btn-success">Publier</button>
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#avisFormCollapse">Fermer</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="panel-card mt-4">
                 <h5 class="mb-3">Vos derniers messages</h5>
                 <div class="list-group list-group-flush">
@@ -218,8 +254,10 @@
                     @endforelse
                 </div>
             </div>
+            <!-- Avis creation moved to sidebar modal -->
         </main>
     </div>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.querySelector('.sidebar');

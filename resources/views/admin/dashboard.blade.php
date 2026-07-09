@@ -243,6 +243,27 @@
                 </div>
             </div>
 
+            <div class="panel-card mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">Avis publiés</h5>
+                    <span class="badge bg-success-subtle text-success">{{ $recentAvis->count() }} à l’affichage</span>
+                </div>
+                <div class="list-group list-group-flush">
+                    @forelse($recentAvis as $item)
+                        <div class="list-group-item d-flex justify-content-between align-items-start gap-3">
+                            <div>
+                                <div class="fw-semibold">{{ optional($item->user)->prenom }} {{ optional($item->user)->nom }}</div>
+                                <small class="text-muted">{{ $item->created_at->format('d/m/Y H:i') }}</small>
+                                <p class="mb-0 mt-2 text-break">{{ \Illuminate\Support\Str::limit($item->contenu, 120) }}</p>
+                            </div>
+                            <span class="badge bg-success-subtle text-success">Publié</span>
+                        </div>
+                    @empty
+                        <div class="text-muted">Aucun avis publié pour le moment.</div>
+                    @endforelse
+                </div>
+            </div>
+
             <div class="row g-4">
                 <div class="col-lg-7">
                     <div class="panel-card">

@@ -38,6 +38,7 @@
           <li><a href="{{ url('/apropos') }}">About</a></li>
           <li><a href="{{ url('/services') }}">Services</a></li>
           <li><a href="{{ url('/contact') }}" class="active">Contact</a></li>
+          <li><a href="{{ route('avis.list') }}">Avis</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>

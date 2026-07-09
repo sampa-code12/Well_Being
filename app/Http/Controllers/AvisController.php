@@ -2,15 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\StatusAvis;
+use App\Enums\StatutAvis;
 use App\Models\Avis;
 use Illuminate\Http\Request;
 
 class AvisController extends Controller
 {
-    public function listeAvis(){
-        $toutAvis = Avis::all();
-        return view('avis.list', compact('toutAvis'));
+    public function listeAvis(Request $request)
+    {
+        $query = Avis::with('user')->latest();
+
+        if ($request->filled('date')) {
+            $query->whereDate('created_at', $request->date('date'));
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status_avis', $request->input('status'));
+        }
+
+        $toutAvis = $query->get();
+        $statuses = collect(StatutAvis::cases())->mapWithKeys(fn ($status) => [$status->value => $status->label()]);
+
+        return view('avis.list', compact('toutAvis', 'statuses'));
     }
 
     public function detailAvis(Avis $avis){
@@ -27,12 +40,13 @@ class AvisController extends Controller
         ]);
 
         Avis::create([
-            'contenu'=>$request->contenu,
-            'user_id'=>auth()->user()->idUser,
-            'StatusModeration'=>StatutAvis::VISIBLE,
+            'contenu' => $request->contenu,
+            'user_id' => auth()->user()->idUser,
+            'status_avis' => StatutAvis::VISIBLE->value,
         ]);
 
-        return redirect()->route('avis.list')->with('succes','avis envoye avec succes');
+        $redirect = $request->input('redirect_to') ?: route('avis.list');
+        return redirect($redirect)->with('succes', 'Avis envoyé avec succès');
     }
 
     public function miseAjourAvis(Request $request,Avis $avis){

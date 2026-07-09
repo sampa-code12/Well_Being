@@ -58,6 +58,28 @@
     </div>
   </header>
 
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
+            <h1>Bienvenue chez Well-Being</h1>
+            <p>Des services d'accompagnement, de solidarité et de bien-être conçus pour vous aider à avancer sereinement.</p>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="{{ url('/services') }}" class="btn-get-started">Découvrir nos services</a>
+            </div>
+          </div>
+          <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
+            <img src="{{ asset('logo/logo_Well_Being.jpeg') }}" class="img-fluid animated" alt="Illustration Well-Being">
+          </div>
+        </div>
+      </div>
+
+    </section><!-- /Hero Section -->
+
     <!-- Clients Section -->
     <section id="clients" class="clients section light-background">
 

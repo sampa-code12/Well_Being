@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\StatusAvis;
+use App\Enums\StatutAvis;
 use Illuminate\Database\Eloquent\Model;
 
 class Avis extends Model
@@ -11,7 +11,9 @@ class Avis extends Model
     protected $primaryKey = 'idAvis';
     protected $fillable = [
         'contenu',
+        'user_id',
         'idUser',
+        'status_avis',
         'StatusModeration'
     ];
 
@@ -23,6 +25,6 @@ class Avis extends Model
     }
 
     public function user(){
-        return $this->belongsTo(User::class,'idUser');
+        return $this->belongsTo(User::class, 'user_id', 'idUser');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Role;
+use App\Enums\StatutAvis;
 use App\Models\Avis;
 use App\Models\Message;
 use App\Models\Service;
@@ -27,7 +28,7 @@ class AdminController extends Controller
         $totalMessages = Message::count();
 
         $recentUsers = User::latest('created_at')->take(5)->get();
-        $recentAvis = Avis::with('user')->latest('created_at')->take(5)->get();
+        $recentAvis = Avis::with('user')->where('status_avis', StatutAvis::VISIBLE->value)->latest('created_at')->take(5)->get();
         $recentMessages = Message::with('user')->latest('created_at')->take(5)->get();
 
         return view('admin.dashboard', compact(
