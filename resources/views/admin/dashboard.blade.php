@@ -248,15 +248,25 @@
                     <h5 class="mb-0">Avis publiés</h5>
                     <span class="badge bg-success-subtle text-success">{{ $recentAvis->count() }} à l’affichage</span>
                 </div>
-                <div class="list-group list-group-flush">
+                <div class="accordion" id="publishedAvisAccordion">
                     @forelse($recentAvis as $item)
-                        <div class="list-group-item d-flex justify-content-between align-items-start gap-3">
-                            <div>
-                                <div class="fw-semibold">{{ optional($item->user)->prenom }} {{ optional($item->user)->nom }}</div>
-                                <small class="text-muted">{{ $item->created_at->format('d/m/Y H:i') }}</small>
-                                <p class="mb-0 mt-2 text-break">{{ \Illuminate\Support\Str::limit($item->contenu, 120) }}</p>
+                        <div class="accordion-item border-0">
+                            <h2 class="accordion-header" id="headingAvis{{ $item->idAvis }}">
+                                <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAvis{{ $item->idAvis }}" aria-expanded="false" aria-controls="collapseAvis{{ $item->idAvis }}">
+                                    <div class="d-flex justify-content-between align-items-start gap-3 w-100">
+                                        <div class="text-start">
+                                            <div class="fw-semibold">{{ optional($item->user)->prenom }} {{ optional($item->user)->nom }}</div>
+                                            <small class="text-muted">{{ $item->created_at->format('d/m/Y H:i') }}</small>
+                                        </div>
+                                        <span class="badge bg-success-subtle text-success">Publié</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="collapseAvis{{ $item->idAvis }}" class="accordion-collapse collapse" aria-labelledby="headingAvis{{ $item->idAvis }}" data-bs-parent="#publishedAvisAccordion">
+                                <div class="accordion-body">
+                                    <p class="mb-0 text-break">{{ $item->contenu }}</p>
+                                </div>
                             </div>
-                            <span class="badge bg-success-subtle text-success">Publié</span>
                         </div>
                     @empty
                         <div class="text-muted">Aucun avis publié pour le moment.</div>
@@ -302,5 +312,6 @@
             </div>
         </main>
     </div>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

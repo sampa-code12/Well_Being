@@ -53,17 +53,25 @@
             @if($avis->isEmpty())
                 <p class="text-muted">Aucun avis n’a encore été publié.</p>
             @else
-                <div class="list-group list-group-flush">
+                <div class="accordion" id="adminAvisAccordion">
                     @foreach($avis as $item)
-                        <div class="list-group-item">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <div>
-                                    <strong>{{ $item->user?->prenom ?? 'Utilisateur' }} {{ $item->user?->nom ?? '' }}</strong>
-                                    <div class="text-muted small">{{ $item->created_at->format('d/m/Y H:i') }}</div>
+                        <div class="accordion-item border-0">
+                            <h2 class="accordion-header" id="headingAvis{{ $item->idAvis }}">
+                                <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAvis{{ $item->idAvis }}" aria-expanded="false" aria-controls="collapseAvis{{ $item->idAvis }}">
+                                    <div class="d-flex justify-content-between align-items-start gap-3 w-100">
+                                        <div class="text-start">
+                                            <strong>{{ $item->user?->prenom ?? 'Utilisateur' }} {{ $item->user?->nom ?? '' }}</strong>
+                                            <div class="text-muted small">{{ $item->created_at->format('d/m/Y H:i') }}</div>
+                                        </div>
+                                        <span class="badge bg-success-subtle text-success">{{ $item->StatusModeration }}</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="collapseAvis{{ $item->idAvis }}" class="accordion-collapse collapse" aria-labelledby="headingAvis{{ $item->idAvis }}" data-bs-parent="#adminAvisAccordion">
+                                <div class="accordion-body">
+                                    <p class="mb-0">{{ $item->contenu }}</p>
                                 </div>
-                                <span class="badge bg-success-subtle text-success">{{ $item->StatusModeration }}</span>
                             </div>
-                            <p class="mb-0">{{ $item->contenu }}</p>
                         </div>
                     @endforeach
                 </div>
@@ -71,5 +79,6 @@
         </div>
     </main>
 </div>
+<script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
