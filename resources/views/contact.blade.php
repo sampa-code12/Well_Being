@@ -90,7 +90,24 @@
           </div>
 
           <div class="col-lg-7" data-aos="fade-up" data-aos-delay="300">
-            <form action="{{ asset('forms/contact.php') }}" method="post" class="php-email-form">
+            @if (session('success'))
+              <div class="alert alert-success mb-4" role="status">
+                {{ session('success') }}
+              </div>
+            @endif
+
+            @if ($errors->any())
+              <div class="alert alert-danger mb-4" role="alert">
+                <ul class="mb-0">
+                  @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif
+
+            <form action="{{ route('contact.store') }}" method="post" class="php-email-form">
+              @csrf
               <div class="row gy-4">
 
                 <div class="col-md-6">

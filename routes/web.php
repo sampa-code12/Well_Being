@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AvisController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\WellBeingController;
 use App\Services\WellBeingProgramService;
@@ -35,7 +36,9 @@ Route::get('/programmes', [WellBeingController::class, 'index'])->name('wellbein
 
 Route::get('/contact', function () {
     return view('contact');
-});
+})->name('contact');
+
+Route::middleware(['throttle:10,1'])->post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::redirect('/services', '/programmes');
 

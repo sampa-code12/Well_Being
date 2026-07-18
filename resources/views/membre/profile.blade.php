@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="d-flex align-items-center gap-2">
-                <a href="{{ url('/') }}" class="btn btn-outline-light d-none d-md-inline">Retour au site</a>
+                <a href="{{ route('membre.dashboard') }}" class="btn btn-outline-light d-none d-md-inline">Retour au dashboard</a>
                 <button class="menu-toggle" id="menuToggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
                     <i class="bi bi-list fs-4"></i>
                 </button>

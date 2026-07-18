@@ -46,7 +46,7 @@
                 <h2 class="mb-1">Profil administrateur</h2>
                 <p class="text-muted mb-0">Consultez et gérez votre profil d’administration.</p>
             </div>
-            <a href="{{ url('/') }}" class="btn btn-outline-success">Retour au site</a>
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-success">Retour au dashboard</a>
         </div>
         <div class="card-soft p-4">
             @if(session('success'))

@@ -2,16 +2,19 @@
 
 namespace Tests\Feature;
 
-use App\Models\Message;
+use App\Mail\ContactSupportMail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class ContactFormTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_public_contact_form_stores_message(): void
+    public function test_public_contact_form_sends_support_email(): void
     {
+        Mail::fake();
+
         $response = $this->post(route('contact.store'), [
             'name' => 'Amina',
             'email' => 'amina@example.com',
@@ -21,9 +24,10 @@ class ContactFormTest extends TestCase
 
         $response->assertRedirect(route('contact'));
         $response->assertSessionHas('success', 'Votre message a bien été envoyé. Nous vous répondrons rapidement.');
-        $this->assertDatabaseHas('messages', [
-            'envoye_par' => 'visiteur',
-        ]);
-        $this->assertTrue(Message::where('envoye_par', 'visiteur')->exists());
+
+        Mail::assertSent(ContactSupportMail::class, function (ContactSupportMail $mail) {
+            return $mail->hasTo(config('mail.from.address'))
+                && $mail->hasReplyTo('amina@example.com');
+        });
     }
 }
