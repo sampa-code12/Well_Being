@@ -367,6 +367,6 @@ WellBeing est un projet Laravel de taille modérée, construit autour d’une ar
 - la gestion des avis,
 - la messagerie,
 - l’administration des données,
-- la présentation des programmes et services.
+- la présentation des programmes .
 
 Le projet est assez clair à comprendre pour un développeur Laravel, mais il reste encore perfectible sur l’ergonomie, la modularité et la robustesse fonctionnelle.
