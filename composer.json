@@ -41,8 +41,7 @@
             "npm run build"
         ],
         "deploy": [
-            "@php artisan migrate:refresh --force",
-            "@php artisan db:seed --force"
+            "@php artisan migrate --force --seed"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
