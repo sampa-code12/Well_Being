@@ -70,7 +70,7 @@
             <nav class="nav flex-column">
                 <a class="nav-link active" href="{{ route('membre.dashboard') }}"><i class="bi bi-grid"></i> Mon espace</a>
                 <a class="nav-link" href="{{ route('membre.profile') }}"><i class="bi bi-person-circle"></i> Mon profil</a>
-                <a class="nav-link" href="{{ route('membre.services') }}"><i class="bi bi-heart-pulse"></i> Mes services</a>
+                <a class="nav-link" href="{{ route('wellbeing.programmes') }}"><i class="bi bi-heart-pulse"></i> Mes programmes</a>
                 <a class="nav-link" href="{{ route('membre.messages') }}"><i class="bi bi-chat-left-text"></i> Mes messages</a>
                 <a class="nav-link" href="#avisFormCollapse" data-bs-toggle="collapse" aria-expanded="false" aria-controls="avisFormCollapse"><i class="bi bi-pencil-square"></i> Publier un avis</a>
                 <a class="nav-link" href="{{ route('membre.favorites') }}"><i class="bi bi-bookmark"></i> Mes favoris</a>
@@ -136,44 +136,58 @@
                 <div class="col-md-6 col-xl-3">
                     <div class="stat-card">
                         <div class="icon"><i class="bi bi-heart-pulse"></i></div>
-                        <h6 class="mb-1">Services</h6>
-                        <h3 class="mb-0">{{ $servicesDisponibles }}</h3>
-                        <small class="text-muted">Disponibles dans le site</small>
+                        <h6 class="mb-1">Programmes</h6>
+                        <h3 class="mb-0">{{ $programmesDisponibles }}</h3>
+                        <small class="text-muted">Axes de la mission</small>
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-3">
                     <div class="stat-card">
-                        <div class="icon"><i class="bi bi-clock-history"></i></div>
-                        <h6 class="mb-1">En attente</h6>
-                        <h3 class="mb-0">{{ $demandesEnAttente }}</h3>
-                        <small class="text-muted">Demandes non encore traitées</small>
+                        <div class="icon"><i class="bi bi-chat-left-text"></i></div>
+                        <h6 class="mb-1">Avis</h6>
+                        <h3 class="mb-0">{{ $avisPublies }}</h3>
+                        <small class="text-muted">Contributions publiées</small>
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-3">
                     <div class="stat-card">
-                        <div class="icon"><i class="bi bi-check2-circle"></i></div>
-                        <h6 class="mb-1">Traitées</h6>
-                        <h3 class="mb-0">{{ $demandesTraites }}</h3>
-                        <small class="text-muted">Demandes déjà suivies</small>
+                        <div class="icon"><i class="bi bi-envelope"></i></div>
+                        <h6 class="mb-1">Messages</h6>
+                        <h3 class="mb-0">{{ $messagesEnvoyes }}</h3>
+                        <small class="text-muted">Échanges enregistrés</small>
                     </div>
+                </div>
+            </div>
+
+            <div class="panel-card mb-4">
+                <h5 class="mb-3">Programmes Well-Being à votre disposition</h5>
+                <div class="row g-3">
+                    @foreach($axes as $axis)
+                        <div class="col-md-6 col-xl-4">
+                            <div class="border rounded-3 p-3 h-100">
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <i class="bi {{ $axis['icon'] }} text-success"></i>
+                                    <strong>{{ $axis['label'] }}</strong>
+                                </div>
+                                <p class="text-muted small mb-0">{{ $axis['description'] }}</p>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
             <div class="row g-4">
                 <div class="col-lg-7">
                     <div class="panel-card">
-                        <h5 class="mb-3">Vos dernières demandes</h5>
+                        <h5 class="mb-3">Vos dernières contributions</h5>
                         <div class="list-group list-group-flush">
-                            @forelse ($demandes as $demande)
-                                <div class="list-group-item d-flex justify-content-between align-items-start gap-3">
-                                    <div class="text-break-all">
-                                        <div class="fw-semibold">{{ optional($demande->services)->titre ?? 'Service non défini' }}</div>
-                                        <small class="text-muted">{{ optional($demande->dateCommande)->format('d/m/Y') }} · {{ $demande->statut_demande }}</small>
-                                    </div>
-                                    <span class="badge bg-light text-dark">{{ ucfirst(str_replace('_', ' ', $demande->statut_demande)) }}</span>
+                            @forelse ($avis as $item)
+                                <div class="list-group-item">
+                                    <div class="fw-semibold text-break-all">{{ \Illuminate\Support\Str::limit($item->contenu, 100) }}</div>
+                                    <small class="text-muted">Ajouté le {{ $item->created_at->format('d/m/Y') }}</small>
                                 </div>
                             @empty
-                                <div class="text-muted">Aucune demande de service n’a encore été enregistrée pour vous.</div>
+                                <div class="text-muted">Aucun avis n’a encore été publié par vous.</div>
                             @endforelse
                         </div>
                     </div>
@@ -216,7 +230,7 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label for="contenu" class="form-label">Votre avis</label>
-                                        <textarea name="contenu" id="contenu" rows="5" class="form-control" required placeholder="Décrivez votre expérience avec nos services..."></textarea>
+                                        <textarea name="contenu" id="contenu" rows="5" class="form-control" required placeholder="Décrivez votre expérience avec nos programmes..."></textarea>
                                     </div>
                                     <input type="hidden" name="redirect_to" value="{{ url()->current() }}">
                                     <div class="d-flex gap-2">

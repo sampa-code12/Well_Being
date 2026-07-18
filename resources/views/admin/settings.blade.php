@@ -31,7 +31,7 @@
             <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="bi bi-grid"></i> Tableau de bord</a>
             <a class="nav-link" href="{{ route('admin.profile') }}"><i class="bi bi-person-circle"></i> Profil</a>
             <a class="nav-link" href="{{ route('admin.users') }}"><i class="bi bi-people"></i> Utilisateurs</a>
-            <a class="nav-link" href="{{ route('admin.services.index') }}"><i class="bi bi-heart-pulse"></i> Services</a>
+            <a class="nav-link" href="{{ route('wellbeing.programmes') }}"><i class="bi bi-heart-pulse"></i> Programmes</a>
             <a class="nav-link" href="{{ route('admin.avis') }}"><i class="bi bi-chat-left-text"></i> Avis</a>
             <a class="nav-link active" href="{{ route('admin.settings') }}"><i class="bi bi-gear"></i> Paramètres</a>
         </nav>
@@ -64,8 +64,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Services</strong></td>
-                            <td>Afficher la section services sur la page d’accueil</td>
+                            <td><strong>Programmes</strong></td>
+                            <td>Afficher la section programmes sur la page d’accueil</td>
                             <td>
                                 <span class="badge {{ $settings['services_visible'] ? 'bg-success' : 'bg-secondary' }}">
                                     {{ $settings['services_visible'] ? 'Activé' : 'Désactivé' }}
@@ -100,7 +100,7 @@
                 @csrf
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" name="services_visible" id="services_visible" value="1" {{ old('services_visible', $settings['services_visible'] ?? true) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="services_visible">Afficher les services sur la page d’accueil</label>
+                    <label class="form-check-label" for="services_visible">Afficher les programmes sur la page d’accueil</label>
                 </div>
                 <div class="form-check form-switch mb-3">
                     <input class="form-check-input" type="checkbox" name="messages_enabled" id="messages_enabled" value="1" {{ old('messages_enabled', $settings['messages_enabled'] ?? true) ? 'checked' : '' }}>

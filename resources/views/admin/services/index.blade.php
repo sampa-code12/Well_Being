@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name') }} - Gestion des services</title>
+    <title>{{ config('app.name') }} - Gestion des programmes</title>
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <style>
@@ -32,7 +32,7 @@
             <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="bi bi-grid"></i> Tableau de bord</a>
             <a class="nav-link" href="{{ route('admin.profile') }}"><i class="bi bi-person-circle"></i> Profil</a>
             <a class="nav-link" href="{{ route('admin.users') }}"><i class="bi bi-people"></i> Utilisateurs</a>
-            <a class="nav-link active" href="{{ route('admin.services.index') }}"><i class="bi bi-heart-pulse"></i> Services</a>
+            <a class="nav-link active" href="{{ route('admin.services.index') }}"><i class="bi bi-heart-pulse"></i> Programmes</a>
             <a class="nav-link" href="{{ route('admin.avis') }}"><i class="bi bi-chat-left-text"></i> Avis</a>
             <a class="nav-link" href="{{ route('admin.messages') }}"><i class="bi bi-envelope"></i> Messages</a>
             <a class="nav-link" href="{{ route('admin.settings') }}"><i class="bi bi-gear"></i> Paramètres</a>
@@ -45,10 +45,10 @@
     <main class="main-panel">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2 class="mb-1">Gestion des services</h2>
-                <p class="text-muted mb-0">Créez, modifiez et supprimez les services visibles sur le site.</p>
+                <h2 class="mb-1">Gestion des programmes</h2>
+                <p class="text-muted mb-0">Créez, modifiez et supprimez les programmes visibles sur le site.</p>
             </div>
-            <a href="{{ route('admin.services.create') }}" class="btn btn-success">Ajouter un service</a>
+            <a href="{{ route('admin.services.create') }}" class="btn btn-success">Ajouter un programme</a>
         </div>
 
         @if(session('success'))
@@ -83,7 +83,7 @@
                                     <td>{{ Str::limit($service->description, 100) }}</td>
                                     <td>
                                         <a href="{{ route('admin.services.edit', $service) }}" class="btn btn-sm btn-outline-primary me-2">Modifier</a>
-                                        <form method="POST" action="{{ route('admin.services.destroy', $service) }}" class="d-inline" onsubmit="return confirm('Supprimer ce service ?');">
+                                        <form method="POST" action="{{ route('admin.services.destroy', $service) }}" class="d-inline" onsubmit="return confirm('Supprimer ce programme ?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>

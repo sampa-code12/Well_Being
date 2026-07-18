@@ -42,7 +42,7 @@
         <ul>
           <li><a href="{{ url('/') }}">Accueil</a></li>
           <li><a href="{{ url('/apropos') }}">À propos</a></li>
-          <li><a href="{{ url('/services') }}">Services</a></li>
+          <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
           <li><a href="{{ url('/contact') }}">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -61,10 +61,10 @@
         <nav class="breadcrumbs">
           <ol>
             <li><a href="{{ url('/') }}">Home</a></li>
-            <li class="current">Services</li>
+            <li class="current">Programmes</li>
           </ol>
         </nav>
-        <h1>Nos services</h1>
+        <h1>Nos programmes</h1>
         <p class="section-description">Des accompagnements pensés pour votre bien-être</p>
       </div>
     </div><!-- End Page Title -->
@@ -135,7 +135,7 @@
         <div class="row justify-content-center text-center">
           <div class="col-lg-6">
             <h4>Rejoignez notre newsletter</h4>
-            <p>Abonnez-vous pour recevoir les dernières nouvelles de nos activités et services.</p>
+            <p>Abonnez-vous pour recevoir les dernières nouvelles de nos activités et programmes.</p>
             <form action="{{ asset('forms/newsletter.php') }}" method="post" class="php-email-form">
               <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="S'abonner"></div>
               <div class="loading">Chargement</div>
@@ -165,13 +165,13 @@
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/') }}">Accueil</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/apropos') }}">À propos</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/services') }}">Services</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Conditions d'utilisation</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Nos services</h4>
+          <h4>Nos programmes</h4>
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Accompagnement bien-être</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Groupes de parole & entraide</a></li>

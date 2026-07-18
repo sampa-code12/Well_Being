@@ -41,7 +41,7 @@
         <nav class="nav flex-column">
             <a class="nav-link" href="{{ route('membre.dashboard') }}"><i class="bi bi-grid"></i> Mon espace</a>
             <a class="nav-link active" href="{{ route('membre.profile') }}"><i class="bi bi-person-circle"></i> Mon profil</a>
-            <a class="nav-link" href="{{ route('membre.services') }}"><i class="bi bi-heart-pulse"></i> Mes services</a>
+            <a class="nav-link" href="{{ route('wellbeing.programmes') }}"><i class="bi bi-heart-pulse"></i> Mes programmes</a>
             <a class="nav-link" href="{{ route('membre.messages') }}"><i class="bi bi-chat-left-text"></i> Mes messages</a>
             <a class="nav-link" href="{{ route('membre.favorites') }}"><i class="bi bi-bookmark"></i> Mes favoris</a>
         

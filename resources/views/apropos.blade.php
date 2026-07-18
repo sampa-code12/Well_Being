@@ -42,7 +42,8 @@
         <ul>
           <li><a href="{{ url('/') }}">Accueil</a></li>
           <li><a href="{{ url('/apropos') }}" class="active">À propos</a></li>
-          <li><a href="{{ url('/services') }}">Services</a></li>
+          <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
+          <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
           <li><a href="{{ url('/contact') }}">Contact</a></li>
           <li><a href="{{ route('avis.list') }}">Avis</a></li>
         </ul>
@@ -109,7 +110,7 @@
         <div class="row justify-content-center text-center">
           <div class="col-lg-6">
             <h4>Rejoignez notre newsletter</h4>
-            <p>Abonnez-vous pour recevoir les dernières nouvelles de nos activités et services.</p>
+            <p>Abonnez-vous pour recevoir les dernières nouvelles de nos activités et programmes.</p>
             <form action="{{ asset('forms/newsletter.php') }}" method="post" class="php-email-form">
               <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="S'abonner"></div>
               <div class="loading">Chargement</div>
@@ -139,13 +140,13 @@
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/') }}">Accueil</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/apropos') }}">À propos</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/services') }}">Services</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Conditions d'utilisation</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Nos services</h4>
+          <h4>Nos programmes</h4>
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Accompagnement bien-être</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Groupes de parole & entraide</a></li>

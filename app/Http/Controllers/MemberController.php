@@ -4,33 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Enums\Role;
 use App\Models\Message;
-use App\Models\Service;
+use App\Services\WellBeingProgramService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class MemberController extends Controller
 {
+    public function __construct(private readonly WellBeingProgramService $programService)
+    {
+    }
+
     public function dashboard()
     {
         $user = Auth::user();
         abort_unless($user && $user->estMembre(), 403);
 
-        $demandes = $user->demande_services()->with('services')->latest('dateCommande')->take(5)->get();
         $avis = $user->avis()->latest()->take(5)->get();
         $messages = $user->messages()->latest()->take(5)->get();
-        $servicesDisponibles = Service::count();
-        $demandesEnAttente = $user->demande_services()->where('statut_demande', 'en_attente')->count();
-        $demandesTraites = $user->demande_services()->whereIn('statut_demande', ['recu', 'en_traitement', 'accepte'])->count();
+        $demandes = collect();
+        $programmesDisponibles = count($this->programService->axes());
+        $messagesEnvoyes = $user->messages()->count();
+        $avisPublies = $user->avis()->count();
+        $axes = $this->programService->axes();
+        $objectives = $this->programService->objectives();
 
         return view('membre.dashboard', compact(
             'user',
-            'demandes',
             'avis',
             'messages',
-            'servicesDisponibles',
-            'demandesEnAttente',
-            'demandesTraites'
+            'demandes',
+            'programmesDisponibles',
+            'messagesEnvoyes',
+            'avisPublies',
+            'axes',
+            'objectives'
         ));
     }
 
@@ -76,16 +84,6 @@ class MemberController extends Controller
         $user->save();
 
         return redirect()->route('membre.profile')->with('success', 'Profil mis à jour.');
-    }
-
-    public function services()
-    {
-        $user = Auth::user();
-        abort_unless($user && $user->estMembre(), 403);
-
-        $services = $user->demande_services()->with('services')->latest('dateCommande')->get();
-
-        return view('membre.services', compact('user', 'services'));
     }
 
     public function messages()

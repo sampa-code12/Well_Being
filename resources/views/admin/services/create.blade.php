@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name') }} - Ajouter un service</title>
+    <title>{{ config('app.name') }} - Ajouter un programme</title>
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <style>
@@ -33,8 +33,8 @@
     <main class="main-panel">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2 class="mb-1">Ajouter un service</h2>
-                <p class="text-muted mb-0">Créez un nouveau service avec une image et une description.</p>
+                <h2 class="mb-1">Ajouter un programme</h2>
+                <p class="text-muted mb-0">Créez un nouveau programme avec une image et une description.</p>
             </div>
             <a href="{{ route('admin.services.index') }}" class="btn btn-outline-success">Retour</a>
         </div>

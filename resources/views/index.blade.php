@@ -42,7 +42,7 @@
         <ul>
           <li><a href="{{ url('/') }}" class="active">Accueil</a></li>
           <li><a href="{{ url('/apropos') }}">À propos</a></li>
-          <li><a href="{{ url('/services') }}">Services</a></li>
+          <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
           <li><a href="{{ url('/contact') }}">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -52,7 +52,10 @@
       <a class="btn-getstarted" href="{{ route('login.form') }}">Connexion</a>
       @endguest
       @auth
-      <a class="btn-getstarted" href="{{ route('membre.dashboard') }}">Mon espace</a>
+      @php
+        $dashboardRoute = auth()->user()->estAdmin() ? route('admin.dashboard') : route('membre.dashboard');
+      @endphp
+      <a class="btn-getstarted" href="{{ $dashboardRoute }}">Mon espace</a>
       @endauth
 
     </div>
@@ -67,9 +70,10 @@
         <div class="row gy-4">
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
             <h1>Bienvenue chez Well-Being</h1>
-            <p>Des services d'accompagnement, de solidarité et de bien-être conçus pour vous aider à avancer sereinement.</p>
+            <p>Des programmes d'accompagnement, de solidarité et de bien-être conçus pour vous aider à avancer sereinement.</p>
             <div class="d-flex flex-wrap gap-3">
-              <a href="{{ url('/services') }}" class="btn-get-started">Découvrir nos services</a>
+              <a href="{{ route('wellbeing.programmes') }}" class="btn-get-started">Découvrir nos programmes</a>
+              <a href="{{ route('wellbeing.programmes') }}" class="btn btn-outline-light">Voir les programmes</a>
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
@@ -153,12 +157,12 @@
 
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
             <p>
-              Fondée par Josias Einstein, l'association Well-Being œuvre au quotidien pour promouvoir le bien-être sous toutes ses formes. Notre mission : accompagner les personnes, fédérer une communauté engagée et proposer des services accessibles à tous.
+              Fondée par Josias Einstein, l'association Well-Being œuvre au quotidien pour promouvoir le bien-être sous toutes ses formes. Notre mission : accompagner les personnes, fédérer une communauté engagée et proposer des programmes accessibles à tous.
             </p>
             <ul>
               <li><i class="bi bi-check2-circle"></i> <span>Un accompagnement humain et personnalisé</span></li>
               <li><i class="bi bi-check2-circle"></i> <span>Une communauté solidaire de membres engagés</span></li>
-              <li><i class="bi bi-check2-circle"></i> <span>Des services accessibles à tous, en ligne comme sur le terrain</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>Des programmes accessibles à tous, en ligne comme sur le terrain</span></li>
             </ul>
           </div>
 
@@ -201,9 +205,9 @@
               </div><!-- End Faq item-->
 
               <div class="faq-item">
-                <h3><span>02</span> Quels services propose l'association ?</h3>
+                <h3><span>02</span> Quels programmes propose l'association ?</h3>
                 <div class="faq-content">
-                  <p>Well-Being propose plusieurs services d'accompagnement au bien-être, détaillés dans notre section Services. Chaque service peut faire l'objet d'une demande directement en ligne.</p>
+                  <p>Well-Being propose plusieurs programmes d'accompagnement au bien-être, détaillés dans notre section Programmes. Chaque action peut faire l'objet d'un engagement ou d'un accompagnement direct.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
               </div><!-- End Faq item-->
@@ -233,38 +237,32 @@
 
              
 
-    <!-- Services Section -->
-    <section id="services" class="services section light-background">
-
-      <!-- Section Title -->
+    <!-- Programmes Section -->
+    <section id="programmes" class="services section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>Des accompagnements pensés pour votre bien-être, à travers notre communauté et nos actions.</p>
-      </div><!-- End Section Title -->
-
-      <div class="container">
-
-        <div class="row gy-4">
-          @forelse($services as $service)
-          <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="{{ 100 + $loop->index * 100 }}">
-            <div class="service-item position-relative">
-              @if($service->image_url)
-                <img src="{{ asset($service->image_url) }}" alt="{{ $service->titre }}" class="img-fluid mb-3 rounded" style="height: 180px; object-fit: cover; width: 100%;">
-              @endif
-              <h4><a href="{{ route('services.show', $service) }}" class="stretched-link">{{ $service->titre }}</a></h4>
-              <p>{{ Str::limit($service->description, 120) }}</p>
-            </div>
-          </div><!-- End Service Item -->
-          @empty
-          <div class="col-12">
-            <div class="alert alert-info">Aucun service disponible pour le moment.</div>
-          </div>
-          @endforelse
-        </div>
-
+        <h2>Programmes</h2>
+        <p>Des actions concrètes autour de la santé, de la prévention, du soutien communautaire et du bien-être global.</p>
       </div>
 
-    </section><!-- /Services Section -->
+      <div class="container">
+        <div class="row gy-4">
+          @foreach($axes as $axe)
+          <div class="col-xl-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="{{ 100 + $loop->index * 100 }}">
+            <div class="service-item position-relative h-100 w-100 p-4 border rounded-4 bg-white">
+              <div class="service-icon mb-3"><i class="bi {{ $axe['icon'] }} fs-4"></i></div>
+              <h4>{{ $axe['label'] }}</h4>
+              <p class="text-muted">{{ $axe['description'] }}</p>
+              <ul class="list-unstyled mb-0">
+                @foreach($axe['objectives'] as $objectif)
+                  <li class="mb-2"><i class="bi bi-check2-circle text-success me-2"></i>{{ $objectif }}</li>
+                @endforeach
+              </ul>
+            </div>
+          </div>
+          @endforeach
+        </div>
+      </div>
+    </section><!-- /Programmes Section -->
 
     <!-- Call To Action Section -->
     <section id="call-to-action" class="call-to-action section dark-background">
@@ -382,7 +380,7 @@
         <div class="row justify-content-center text-center">
           <div class="col-lg-6">
             <h4>Rejoignez notre newsletter</h4>
-            <p>Abonnez-vous pour recevoir les dernières nouvelles de nos activités et services.</p>
+            <p>Abonnez-vous pour recevoir les dernières nouvelles de nos activités et programmes.</p>
             <form action="#" method="post" class="php-email-form">
               <div class="sent-message">Your subscription request has been sent. Thank you!</div>
             </form>
@@ -410,13 +408,13 @@
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/') }}">Accueil</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/apropos') }}">À propos</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/services') }}">Services</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Conditions d'utilisation</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Nos services</h4>
+          <h4>Nos programmes</h4>
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Accompagnement bien-être</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Groupes de parole & entraide</a></li>

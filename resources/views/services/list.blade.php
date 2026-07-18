@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ config('app.name') }} - Services</title>
-  <meta name="description" content="Découvrez les services bien-être conçus pour votre équilibre.">
-  <meta name="keywords" content="services bien-être, accompagnement, santé, wellness">
+  <title>{{ config('app.name') }} - Programmes</title>
+  <meta name="description" content="Découvrez les programmes bien-être conçus pour votre équilibre.">
+  <meta name="keywords" content="programmes bien-être, accompagnement, santé, wellness">
 
   <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
@@ -39,7 +39,7 @@
         <ul>
           <li><a href="{{ url('/') }}">Accueil</a></li>
           <li><a href="{{ url('/apropos') }}">À propos</a></li>
-          <li><a href="{{ url('/services') }}" class="active">Services</a></li>
+          <li><a href="{{ route('wellbeing.programmes') }}" class="active">Programmes</a></li>
           <li><a href="{{ route('avis.list') }}">Avis</a></li>
           <li><a href="{{ url('/contact') }}">Contact</a></li>
         </ul>
@@ -61,8 +61,8 @@
         
         <div class="row gy-4 align-items-center">
           <div class="col-lg-7" data-aos="fade-up">
-            <span class="badge rounded-pill bg-light text-success mb-3 px-3 py-2">Nos services</span>
-            <h1 class="display-5 fw-bold mb-3">Des services pensés pour votre équilibre</h1>
+            <span class="badge rounded-pill bg-light text-success mb-3 px-3 py-2">Nos programmes</span>
+            <h1 class="display-5 fw-bold mb-3">Des programmes pensés pour votre équilibre</h1>
             <p class="lead mb-4" style="max-width: 680px; color: rgba(255,255,255,0.9);">
               Découvrez des accompagnements, ateliers et espaces d’échange conçus pour vous aider à avancer avec douceur et confiance.
             </p>
@@ -101,12 +101,12 @@
                 @if($service->image_url)
                   <img src="{{ asset($service->image_url) }}" alt="{{ $service->titre }}" class="img-fluid rounded-4 mb-3" style="height: 180px; object-fit: cover; width: 100%;">
                 @endif
-                <a href="{{ route('services.show', $service) }}" class="btn btn-outline-success">Voir le service</a>
+                <a href="{{ route('wellbeing.programmes') }}" class="btn btn-outline-success">Voir le programme</a>
               </article>
             </div>
           @empty
             <div class="col-12">
-              <div class="alert alert-info rounded-4">Aucun service disponible pour le moment. Revenez bientôt ou contactez-nous directement.</div>
+              <div class="alert alert-info rounded-4">Aucun programme disponible pour le moment. Revenez bientôt ou contactez-nous directement.</div>
             </div>
           @endforelse
         </div>
@@ -118,7 +118,7 @@
         <div class="cta-panel p-4 p-lg-5">
           <div class="row align-items-center gy-4">
             <div class="col-lg-8">
-              <h3 class="mb-2">Vous ne trouvez pas le service qui vous correspond ?</h3>
+              <h3 class="mb-2">Vous ne trouvez pas le programme qui vous correspond ?</h3>
               <p class="mb-0 text-muted">Nous pouvons vous orienter vers la meilleure solution en fonction de votre besoin.</p>
             </div>
             <div class="col-lg-4 text-lg-end">
@@ -136,7 +136,7 @@
         <div class="row justify-content-center text-center">
           <div class="col-lg-6">
             <h4>Rejoignez notre newsletter</h4>
-            <p>Recevez nos actualités et nos offres de services directement dans votre boîte mail.</p>
+            <p>Recevez nos actualités et nos offres de programmes directement dans votre boîte mail.</p>
             <form action="#" method="post" class="php-email-form">
               <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="S'abonner"></div>
               <div class="loading">Chargement</div>
@@ -166,17 +166,17 @@
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/') }}">Accueil</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/apropos') }}">À propos</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/services') }}">Services</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/contact') }}">Contact</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Nos services</h4>
+          <h4>Nos programmes</h4>
           <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('services.list') }}">Accompagnement</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('services.list') }}">Ateliers</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('services.list') }}">Groupes de parole</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('wellbeing.programmes') }}">Accompagnement</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('wellbeing.programmes') }}">Ateliers</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('wellbeing.programmes') }}">Groupes de parole</a></li>
           </ul>
         </div>
 

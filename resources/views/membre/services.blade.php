@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name') }} - Mes services</title>
+    <title>{{ config('app.name') }} - Mes programmes</title>
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <style>
@@ -54,7 +54,7 @@
         <nav class="nav flex-column">
             <a class="nav-link" href="{{ route('membre.dashboard') }}"><i class="bi bi-grid"></i> Mon espace</a>
             <a class="nav-link" href="{{ route('membre.profile') }}"><i class="bi bi-person-circle"></i> Mon profil</a>
-            <a class="nav-link active" href="{{ route('membre.services') }}"><i class="bi bi-heart-pulse"></i> Mes services</a>
+            <a class="nav-link active" href="{{ route('membre.services') }}"><i class="bi bi-heart-pulse"></i> Mes programmes</a>
             <a class="nav-link" href="{{ route('membre.messages') }}"><i class="bi bi-chat-left-text"></i> Mes messages</a>
             <a class="nav-link" href="{{ route('membre.favorites') }}"><i class="bi bi-bookmark"></i> Mes favoris</a>
             <form method="POST" action="{{ route('logout') }}">
@@ -83,15 +83,15 @@
             </div>
         </div>
         <div class="card-soft p-4">
-            <h5 class="mb-3">Services liés à votre compte</h5>
+            <h5 class="mb-3">Programmes liés à votre compte</h5>
             @if($services->isEmpty())
-                <div class="alert alert-light border">Aucun service n’est encore associé à votre compte.</div>
+                <div class="alert alert-light border">Aucun programme n’est encore associé à votre compte.</div>
             @else
                 <div class="row g-3">
                     @foreach($services as $service)
                         <div class="col-md-6">
                             <div class="service-item">
-                                <div class="fw-semibold">{{ optional($service->services)->titre ?? 'Service non défini' }}</div>
+                                <div class="fw-semibold">{{ optional($service->services)->titre ?? 'Programme non défini' }}</div>
                                 <div class="text-muted small mt-1">Date : {{ optional($service->dateCommande)->format('d/m/Y') }}</div>
                                 <div class="mt-2">
                                     <span class="badge bg-success-subtle text-success">{{ ucfirst(str_replace('_', ' ', $service->statut_demande)) }}</span>

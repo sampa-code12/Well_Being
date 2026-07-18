@@ -6,15 +6,19 @@ use App\Enums\Role;
 use App\Enums\StatutAvis;
 use App\Models\Avis;
 use App\Models\Message;
-use App\Models\Service;
 use App\Models\SystemSetting;
 use App\Models\User;
+use App\Services\WellBeingProgramService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    public function __construct(private readonly WellBeingProgramService $programService)
+    {
+    }
+
     public function dashboard()
     {
         $user = Auth::user();
@@ -23,25 +27,29 @@ class AdminController extends Controller
         $totalUsers = User::count();
         $totalMembers = User::where('role', Role::MEMBRE)->count();
         $totalAdmins = User::where('role', Role::ADMIN)->count();
-        $totalServices = Service::count();
+        $totalProgrammes = count($this->programService->axes());
         $totalAvis = Avis::count();
         $totalMessages = Message::count();
 
         $recentUsers = User::latest('created_at')->take(5)->get();
         $recentAvis = Avis::with('user')->where('status_avis', StatutAvis::VISIBLE->value)->latest('created_at')->take(5)->get();
         $recentMessages = Message::with('user')->latest('created_at')->take(5)->get();
+        $metrics = $this->programService->dashboardMetrics();
+        $axes = $this->programService->axes();
 
         return view('admin.dashboard', compact(
             'user',
             'totalUsers',
             'totalMembers',
             'totalAdmins',
-            'totalServices',
+            'totalProgrammes',
             'totalAvis',
             'totalMessages',
             'recentUsers',
             'recentAvis',
-            'recentMessages'
+            'recentMessages',
+            'metrics',
+            'axes'
         ));
     }
 

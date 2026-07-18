@@ -162,7 +162,7 @@
                 <a class="nav-link active" href="{{ route('admin.dashboard') }}"><i class="bi bi-grid"></i> Tableau de bord</a>
                 <a class="nav-link" href="{{ route('admin.profile') }}"><i class="bi bi-person-circle"></i> Profil</a>
                 <a class="nav-link" href="{{ route('admin.users') }}"><i class="bi bi-people"></i> Utilisateurs</a>
-                <a class="nav-link" href="{{ route('admin.services.index') }}"><i class="bi bi-heart-pulse"></i> Services</a>
+                <a class="nav-link" href="{{ route('wellbeing.programmes') }}"><i class="bi bi-heart-pulse"></i> Programmes</a>
                 <a class="nav-link" href="{{ route('admin.avis') }}"><i class="bi bi-chat-left-text"></i> Avis</a>
                 <a class="nav-link" href="{{ route('admin.messages') }}"><i class="bi bi-envelope"></i> Messages</a>
                 <a class="nav-link" href="{{ route('admin.settings') }}"><i class="bi bi-gear"></i> Paramètres</a>
@@ -220,9 +220,9 @@
                 <div class="col-md-6 col-xl-3">
                     <div class="stat-card">
                         <div class="icon"><i class="bi bi-heart-pulse"></i></div>
-                        <h6 class="mb-1">Services</h6>
-                        <h3 class="mb-0">{{ $totalServices }}</h3>
-                        <small class="text-muted">Offres actives</small>
+                        <h6 class="mb-1">Programmes</h6>
+                        <h3 class="mb-0">{{ $totalProgrammes }}</h3>
+                        <small class="text-muted">Axes d’intervention</small>
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-3">
@@ -243,30 +243,55 @@
                 </div>
             </div>
 
+            <div class="row g-4 mb-4">
+                <div class="col-lg-8">
+                    <div class="panel-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0">Indicateurs de mission</h5>
+                            <span class="badge bg-success-subtle text-success">Cible 5 000 personnes/an</span>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <div class="p-3 rounded-3 bg-light">
+                                    <div class="text-muted small">Couverture annuelle</div>
+                                    <div class="h4 mb-0">{{ $metrics['annualReach'] }}</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="p-3 rounded-3 bg-light">
+                                    <div class="text-muted small">Progression</div>
+                                    <div class="h4 mb-0">{{ $metrics['progress'] }}%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel-card">
+                        <h5 class="mb-3">Axes de programme</h5>
+                        <ul class="list-unstyled mb-0">
+                            @foreach($axes as $axis)
+                                <li class="d-flex align-items-center gap-2 mb-2"><i class="bi {{ $axis['icon'] }} text-success"></i>{{ $axis['label'] }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <div class="panel-card mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="mb-0">Avis publiés</h5>
                     <span class="badge bg-success-subtle text-success">{{ $recentAvis->count() }} à l’affichage</span>
                 </div>
-                <div class="accordion" id="publishedAvisAccordion">
+                <div class="list-group list-group-flush">
                     @forelse($recentAvis as $item)
-                        <div class="accordion-item border-0">
-                            <h2 class="accordion-header" id="headingAvis{{ $item->idAvis }}">
-                                <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAvis{{ $item->idAvis }}" aria-expanded="false" aria-controls="collapseAvis{{ $item->idAvis }}">
-                                    <div class="d-flex justify-content-between align-items-start gap-3 w-100">
-                                        <div class="text-start">
-                                            <div class="fw-semibold">{{ optional($item->user)->prenom }} {{ optional($item->user)->nom }}</div>
-                                            <small class="text-muted">{{ $item->created_at->format('d/m/Y H:i') }}</small>
-                                        </div>
-                                        <span class="badge bg-success-subtle text-success">Publié</span>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="collapseAvis{{ $item->idAvis }}" class="accordion-collapse collapse" aria-labelledby="headingAvis{{ $item->idAvis }}" data-bs-parent="#publishedAvisAccordion">
-                                <div class="accordion-body">
-                                    <p class="mb-0 text-break">{{ $item->contenu }}</p>
-                                </div>
+                        <div class="list-group-item d-flex justify-content-between align-items-start gap-3">
+                            <div>
+                                <div class="fw-semibold">{{ optional($item->user)->prenom }} {{ optional($item->user)->nom }}</div>
+                                <small class="text-muted">{{ $item->created_at->format('d/m/Y H:i') }}</small>
+                                <p class="mb-0 mt-2 text-break">{{ \Illuminate\Support\Str::limit($item->contenu, 120) }}</p>
                             </div>
+                            <span class="badge bg-success-subtle text-success">Publié</span>
                         </div>
                     @empty
                         <div class="text-muted">Aucun avis publié pour le moment.</div>
@@ -312,6 +337,5 @@
             </div>
         </main>
     </div>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

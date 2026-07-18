@@ -22,11 +22,6 @@ class DemandeService extends Model
         ];
     }
 
-    public function services()
-    {
-        return $this->belongsTo(Service::class, 'service_id', 'idService');
-    }
-
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id', 'idUser');

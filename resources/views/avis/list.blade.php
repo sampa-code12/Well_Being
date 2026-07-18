@@ -35,7 +35,7 @@
         <ul>
           <li><a href="{{ url('/') }}">Accueil</a></li>
           <li><a href="{{ url('/apropos') }}">À propos</a></li>
-          <li><a href="{{ url('/services') }}">Services</a></li>
+          <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
           <li><a href="{{ url('/contact') }}">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -57,7 +57,7 @@
           <div class="col-lg-8">
             <span class="badge rounded-pill bg-light text-success mb-3 px-3 py-2">Témoignages</span>
             <h1 class="display-5 fw-bold mb-3">Ce que nos membres disent de Well-Being</h1>
-            <p class="lead mb-0" style="color: rgba(255,255,255,0.9);">Découvrez les avis partagés par ceux qui ont bénéficié de nos services et de notre accompagnement.</p>
+            <p class="lead mb-0" style="color: rgba(255,255,255,0.9);">Découvrez les avis partagés par ceux qui ont bénéficié de nos programmes et de notre accompagnement.</p>
           </div>
           <div class="col-lg-4 text-lg-end">
             <a href="{{ url('/contact') }}" class="btn btn-light text-success fw-semibold">Partager votre expérience</a>
@@ -147,7 +147,7 @@
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/') }}">Accueil</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/apropos') }}">À propos</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/services') }}">Services</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/contact') }}">Contact</a></li>
           </ul>
         </div>

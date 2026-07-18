@@ -34,7 +34,7 @@
         <ul>
           <li><a href="{{ url('/') }}">Accueil</a></li>
           <li><a href="{{ url('/apropos') }}">À propos</a></li>
-          <li><a href="{{ url('/services') }}" class="active">Services</a></li>
+          <li><a href="{{ route('wellbeing.programmes') }}" class="active">Programmes</a></li>
           <li><a href="{{ url('/contact') }}">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -52,10 +52,10 @@
   <main class="main">
     <section class="page-hero" data-aos="fade">
       <div class="container">
-        <a href="{{ route('services.list') }}" class="btn btn-outline-light mb-4"><i class="bi bi-arrow-left me-2"></i>Retour aux services</a>
+        <a href="{{ route('wellbeing.programmes') }}" class="btn btn-outline-light mb-4"><i class="bi bi-arrow-left me-2"></i>Retour aux programmes</a>
         <div class="row gy-4 align-items-center">
           <div class="col-lg-7" data-aos="fade-up">
-            <span class="badge rounded-pill bg-light text-success mb-3 px-3 py-2">Service Well-Being</span>
+            <span class="badge rounded-pill bg-light text-success mb-3 px-3 py-2">Programme Well-Being</span>
             <h1 class="display-5 fw-bold mb-3">{{ $service->titre }}</h1>
             <p class="lead mb-0" style="color: rgba(255,255,255,0.9);">Découvrez ce service en détail et sachez comment l’association peut vous accompagner.</p>
           </div>
@@ -92,7 +92,7 @@
               <h3 class="h4 mb-3">Prêt à commencer ?</h3>
               <p class="text-muted mb-4">Vous pouvez nous contacter pour obtenir plus d’informations ou demander un accompagnement adapté à votre situation.</p>
               <a href="{{ url('/contact') }}" class="btn btn-success w-100 mb-2">Nous contacter</a>
-              <a href="{{ route('services.list') }}" class="btn btn-outline-success w-100">Voir tous les services</a>
+              <a href="{{ route('wellbeing.programmes') }}" class="btn btn-outline-success w-100">Voir tous les programmes</a>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/') }}">Accueil</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/apropos') }}">À propos</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/services') }}">Services</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/contact') }}">Contact</a></li>
           </ul>
         </div>

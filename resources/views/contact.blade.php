@@ -36,7 +36,8 @@
         <ul>
           <li><a href="{{ url('/') }}">Home</a></li>
           <li><a href="{{ url('/apropos') }}">About</a></li>
-          <li><a href="{{ url('/services') }}">Services</a></li>
+          <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
+          <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
           <li><a href="{{ url('/contact') }}" class="active">Contact</a></li>
           <li><a href="{{ route('avis.list') }}">Avis</a></li>
         </ul>
@@ -168,7 +169,7 @@
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/') }}">Home</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/apropos') }}">About us</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/services') }}">Services</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
           </ul>
         </div>
