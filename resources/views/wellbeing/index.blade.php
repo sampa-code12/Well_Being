@@ -50,7 +50,7 @@
             <div class="col-md-6 col-xl-3">
                 <div class="card-soft p-4 metric">
                     <div class="text-muted small">Programmes en ligne</div>
-                    <div class="h3 fw-bold mb-0">{{ $metrics['services'] }}</div>
+                    <div class="h3 fw-bold mb-0">{{ $metrics['services'] ?? 'pas encore disponible' }}</div>
                 </div>
             </div>
             <div class="col-md-6 col-xl-3">
