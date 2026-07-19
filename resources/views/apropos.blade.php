@@ -43,7 +43,6 @@
           <li><a href="{{ url('/') }}">Accueil</a></li>
           <li><a href="{{ url('/apropos') }}" class="active">À propos</a></li>
           <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
-          <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
           <li><a href="{{ url('/contact') }}">Contact</a></li>
           <li><a href="{{ route('avis.list') }}">Avis</a></li>
         </ul>
@@ -58,43 +57,99 @@
   <main class="main">
 
     <!-- Page Title -->
-    <div class="page-title" data-aos="fade">
+    <div class="page-title py-4 py-md-5" data-aos="fade">
       <div class="container">
-        <nav class="breadcrumbs">
-          <ol>
-            <li><a href="{{ url('/') }}">Home</a></li>
-            <li class="current">À propos</li>
+        <nav class="breadcrumbs" aria-label="Fil d’ariane">
+          <ol class="breadcrumb mb-3 justify-content-center justify-content-md-start">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}" class="text-decoration-none text-success">Accueil</a></li>
+            <li class="breadcrumb-item active text-white" aria-current="page">À propos</li>
           </ol>
         </nav>
-        <h1>À propos de Well-Being</h1>
-        <p>Une association au service du bien-être et de la solidarité</p>
+        <h1 class="display-6 fw-bold mb-2">À propos de Well-Being</h1>
+        <p class="lead mb-0 text-white-50">Une association engagée pour le bien-être, la santé, la prévention et la solidarité.</p>
       </div>
     </div><!-- End Page Title -->
 
     <!-- About Section -->
-    <section id="about" class="about section">
+    <section id="about" class="about section py-3 py-md-4">
       <div class="container" data-aos="fade-up">
-        <div class="row gy-4 align-items-center">
+        <div class="row gy-4 align-items-start">
           <div class="col-lg-7">
-            <h2>Notre histoire</h2>
-            <p>Well-Being est née de la volonté de son fondateur, Josias Einstein, de créer un espace où chacun peut trouver écoute, accompagnement et ressources pour améliorer son bien-être physique, mental et social. Depuis sa création, l'association fédère une communauté grandissante de membres, de bénévoles et de partenaires engagés autour d'une même mission : faire du bien-être un droit accessible à tous.</p>
+            <h2 class="mb-3">Notre histoire</h2>
+            <p class="mb-3">Well-Being est une association fondée par Aloys Josias Tapiemene Tapondjou et Georgette Indirah Mbinack Nsoga, animée par la volonté de promouvoir le bien-être global des personnes et des communautés. Elle intervient dans l’extrême nord et à travers le territoire national pour renforcer la santé, la cohésion sociale, l’éducation et la prévention.</p>
+            <p class="mb-3">Notre mission est de sensibiliser, accompagner et mobiliser les communautés autour de pratiques favorables au bien-être physique, mental et social. À travers des actions de proximité, l’association met en place des initiatives destinées aux jeunes, aux familles, aux femmes et aux personnes vulnérables.</p>
+            <p class="mb-0">Nous travaillons à créer des espaces d’écoute, à lutter contre les tabous, à promouvoir l’accès à des informations essentielles et à construire des partenariats solides avec les collectivités, les écoles, les centres de santé et les acteurs communautaires.</p>
           </div>
 
           <div class="col-lg-5">
-            <div class="icon-box mb-4">
+            <div class="icon-box mb-3">
               <i class="bi bi-heart-pulse"></i>
-              <h4>Nos objectifs</h4>
-              <p>Accroître la visibilité de l'association et de ses actions.</p>
+              <h4>Objectif général</h4>
+              <p>Devenir l’association de référence à Kaélé pour le bien-être physique, mental et social, en touchant directement 5 000 personnes par an.</p>
             </div>
-            <div class="icon-box mb-4">
+            <div class="icon-box mb-3">
               <i class="bi bi-people"></i>
               <h4>Nos valeurs</h4>
-              <p>Solidarité, écoute, engagement et intégrité au cœur de nos actions.</p>
+              <p>Solidarité, écoute, engagement, inclusion et proximité communautaire.</p>
+            </div>
+            <div class="icon-box mb-3 border-success-subtle">
+              <i class="bi bi-stars text-success"></i>
+              <h4 class="text-success">Nos membres fondateurs</h4>
+              <p class="fw-semibold mb-0" style="font-size: 1.02rem; line-height: 1.7;">
+                <span class="d-block text-dark">Aloys Josias Tapiemene Tapondjou</span>
+                <span class="d-block text-dark">Georgette Indirah Mbinack Nsoga</span>
+              </p>
             </div>
             <div class="icon-box">
-              <i class="bi bi-stars"></i>
-              <h4>Nos membres fondateurs</h4>
-              <p>Josias Einstein, fondateur de Well-Being.</p>
+              <i class="bi bi-shield-check"></i>
+              <h4>Nos priorités</h4>
+              <p>Prévention, santé mentale, éducation, autonomisation des femmes et renforcement du tissu social.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 mt-2 mt-md-4">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body p-4 p-md-5">
+                <div class="d-flex flex-column flex-md-row align-items-md-start gap-4">
+                  <div class="flex-shrink-0 w-100" style="max-width: 220px;">
+                    <div class="bg-light border rounded-4 d-flex align-items-center justify-content-center" style="min-height: 220px; border-style: dashed; border-width: 2px; border-color: #cfe8d8;">
+                      <div class="text-center text-muted px-3">
+                        <i class="bi bi-person-circle fs-1 d-block mb-2"></i>
+                        <span class="fw-semibold">Photo du fondateur</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h3 class="h5 fw-bold text-success mb-3">Aloys Josias Tapiemene Tapondjou</h3>
+                    <p class="text-muted mb-3">Ajoutez ici une petite biographie, ses parcours, ses motivations et son rôle dans l’association.</p>
+                    <p class="mb-0">Vous pouvez insérer un texte court, une courte présentation personnelle et les engagements qui l’animent dans la mission de Well-Being.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body p-4 p-md-5">
+                <div class="d-flex flex-column flex-md-row align-items-md-start gap-4">
+                  <div class="flex-shrink-0 w-100" style="max-width: 220px;">
+                    <div class="bg-light border rounded-4 d-flex align-items-center justify-content-center" style="min-height: 220px; border-style: dashed; border-width: 2px; border-color: #cfe8d8;">
+                      <div class="text-center text-muted px-3">
+                        <i class="bi bi-person-circle fs-1 d-block mb-2"></i>
+                        <span class="fw-semibold">Photo de la fondatrice</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex-grow-1">
+                    <h3 class="h5 fw-bold text-success mb-3">Georgette Indirah Mbinack Nsoga</h3>
+                    <p class="text-muted mb-3">Ajoutez ici une petite biographie, son parcours, ses motivations et son rôle dans l’association.</p>
+                    <p class="mb-0">Vous pouvez insérer un texte court, une courte présentation personnelle et les engagements qui l’animent dans la mission de Well-Being.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

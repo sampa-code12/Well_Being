@@ -157,17 +157,24 @@
 
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
             <p>
-              Fondée par Josias Einstein, l'association Well-Being œuvre au quotidien pour promouvoir le bien-être sous toutes ses formes. Notre mission : accompagner les personnes, fédérer une communauté engagée et proposer des programmes accessibles à tous.
+              Fondée par Aloys Josias Tapiemene Tapondjou et Georgette Indirah Mbinack Nsoga, l’association Well-Being travaille pour promouvoir le bien-être physique, mental, social et communautaire au Cameroun et au-delà. Sa mission est d’accompagner les jeunes, les familles et les communautés à travers des actions concrètes de prévention, d’éducation et de solidarité.
             </p>
             <ul>
-              <li><i class="bi bi-check2-circle"></i> <span>Un accompagnement humain et personnalisé</span></li>
-              <li><i class="bi bi-check2-circle"></i> <span>Une communauté solidaire de membres engagés</span></li>
-              <li><i class="bi bi-check2-circle"></i> <span>Des programmes accessibles à tous, en ligne comme sur le terrain</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>Des actions de santé, de prévention et d’écoute</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>Un accompagnement au service des jeunes et des familles</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>Des programmes accessibles et orientés impact communautaire</span></li>
             </ul>
           </div>
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <p>Depuis sa création, Well-Being s'appuie sur des valeurs fortes de solidarité, d'écoute et d'engagement pour construire, avec ses membres et partenaires, un impact durable sur le bien-être de chacun.</p>
+            <div class="p-3 rounded-4 border border-success-subtle bg-white bg-opacity-75 shadow-sm mb-3">
+              <p class="mb-2 fw-semibold text-success">Fondateurs de Well-Being</p>
+              <p class="mb-0 fw-bold text-dark" style="font-size: 1.05rem; line-height: 1.7;">
+                Aloys Josias Tapiemene Tapondjou<br>
+                Georgette Indirah Mbinack Nsoga
+              </p>
+            </div>
+            <p>Well-Being s’appuie sur des valeurs de solidarité, d’écoute, d’engagement et de proximité pour créer un environnement favorable au bien-être de chacun, avec un objectif clair : devenir l’association de référence pour le bien-être à Kaélé et au-delà.</p>
             <a href="{{ url('/apropos') }}" class="read-more"><span>En savoir plus</span><i class="bi bi-arrow-right"></i></a>
           </div>
 
