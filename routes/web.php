@@ -47,6 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::put('/admin/profile', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::post('/admin/users/{user}/promote', [AdminController::class, 'promote'])->name('admin.users.promote');
+    Route::post('/admin/users/{user}/demote', [AdminController::class, 'demote'])->name('admin.users.demote');
     Route::delete('/admin/users/{user}', [AdminController::class, 'destroy'])->name('admin.users.destroy');
     Route::get('/admin/avis', [AdminController::class, 'avis'])->name('admin.avis');
     Route::get('/admin/messages', [AdminController::class, 'messages'])->name('admin.messages');
@@ -64,8 +66,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [MemberController::class, 'logout'])->name('logout');
 
     // Avis
-    Route::get('/avis', [AvisController::class, 'listeAvis'])->name('avis.list');
     Route::post('/avis', [AvisController::class, 'creerAvis'])->name('avis.store');
     Route::get('/avis/{avis}', [AvisController::class, 'detailAvis'])->name('avis.show');
     Route::put('/avis/{avis}', [AvisController::class, 'miseAjourAvis'])->name('avis.update');
 });
+
+Route::get('/avis', [AvisController::class, 'listeAvis'])->name('avis.list');

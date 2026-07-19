@@ -59,8 +59,55 @@ class AdminController extends Controller
         abort_unless($user && $user->estAdmin(), 403);
 
         $users = User::orderByDesc('created_at')->get();
+        $promotableUserIds = User::eligibleForAdminPromotion()->pluck('idUser')->all();
 
-        return view('admin.users', compact('users'));
+        return view('admin.users', compact('users', 'promotableUserIds'));
+    }
+
+    public function promote(User $user)
+    {
+        $admin = Auth::user();
+        abort_unless($admin && $admin->estAdmin(), 403);
+
+        if ($admin->idUser === $user->idUser) {
+            return redirect()->route('admin.users')->with('error', 'Vous ne pouvez pas promouvoir votre propre compte.');
+        }
+
+        if ($user->role === Role::ADMIN) {
+            return redirect()->route('admin.users')->with('error', 'Cet utilisateur est déjà administrateur.');
+        }
+
+        $user->update([
+            'role' => Role::ADMIN,
+            'promoted_by' => $admin->idUser,
+        ]);
+
+        return redirect()->route('admin.users')->with('success', 'Utilisateur promu administrateur avec succès.');
+    }
+
+    public function demote(User $user)
+    {
+        $admin = Auth::user();
+        abort_unless($admin && $admin->estAdmin(), 403);
+
+        if ($admin->idUser === $user->idUser) {
+            return redirect()->route('admin.users')->with('error', 'Vous ne pouvez pas retirer vos propres droits.');
+        }
+
+        if ($user->role !== Role::ADMIN) {
+            return redirect()->route('admin.users')->with('error', 'Cet utilisateur n’est pas administrateur.');
+        }
+
+        if ($admin->promoted_by && $admin->promoted_by === $user->idUser) {
+            abort(403, 'Vous ne pouvez pas retirer les droits de la personne qui vous a nommé administrateur.');
+        }
+
+        $user->update([
+            'role' => Role::MEMBRE,
+            'promoted_by' => null,
+        ]);
+
+        return redirect()->route('admin.users')->with('success', 'Droits d’administrateur retirés avec succès.');
     }
 
     public function destroy(User $user)

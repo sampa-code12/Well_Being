@@ -50,7 +50,10 @@
       <a class="btn-getstarted" href="{{ route('login.form') }}">Connexion</a>
       @endguest
       @auth
-      <a class="btn-getstarted" href="{{ route('membre.dashboard') }}">Mon espace</a>
+      @php
+      $dashboardRoute =  auth()->user()->estAdmin() ? route('admin.dashboard') : route('membre.dashboard');
+      @endphp
+      <a class="btn-getstarted" href="{{ $dashboardRoute }}">Mon espace</a>
       @endauth
     </div>
   </header>

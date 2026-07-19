@@ -32,7 +32,8 @@ class User extends Authenticatable
         'profession',
         'email',
         'password',
-        'role'
+        'role',
+        'promoted_by'
     ];
 
     /**
@@ -67,6 +68,11 @@ class User extends Authenticatable
     public function estMembre():bool
     {
         return $this->role == Role::MEMBRE;
+    }
+
+    public function scopeEligibleForAdminPromotion($query)
+    {
+        return $query->where('role', Role::MEMBRE);
     }
 
     public function avis()

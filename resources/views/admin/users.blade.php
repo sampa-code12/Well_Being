@@ -79,6 +79,19 @@
                                     <td>{{ $userItem->created_at->format('d/m/Y') }}</td>
                                     <td>
                                         @if(auth()->id() !== $userItem->idUser)
+                                            @if($userItem->role === \App\Enums\Role::ADMIN)
+                                                @if(!(auth()->user()?->promoted_by && auth()->user()->promoted_by == $userItem->idUser))
+                                                    <form method="POST" action="{{ route('admin.users.demote', $userItem) }}" class="d-inline">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-sm btn-outline-warning">Retirer</button>
+                                                    </form>
+                                                @endif
+                                            @elseif(in_array($userItem->idUser, $promotableUserIds, true))
+                                                <form method="POST" action="{{ route('admin.users.promote', $userItem) }}" class="d-inline">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-outline-success">Nommer admin</button>
+                                                </form>
+                                            @endif
                                             <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-delete-url="{{ route('admin.users.destroy', $userItem) }}" data-user-name="{{ $userItem->prenom }} {{ $userItem->nom }}">
                                                 Supprimer
                                             </button>

@@ -45,7 +45,10 @@
       <a class="btn-getstarted" href="{{ route('login.form') }}">Connexion</a>
       @endguest
       @auth
-      <a class="btn-getstarted" href="{{ route('membre.dashboard') }}">Mon espace</a>
+      @php
+      $dashboardRoute =  auth()->user()->estAdmin() ? route('admin.dashboard') : route('membre.dashboard');
+      @endphp
+      <a class="btn-getstarted" href="{{ $dashboardRoute }}">Mon espace</a>
       @endauth
     </div>
   </header>
@@ -70,9 +73,14 @@
       <div class="container">
         <div class="review-card p-4 mb-4" data-aos="fade-up">
           @auth
-            <h3 class="h5 mb-3">Laisser un avis</h3>
-            <p class="text-muted">Pour publier un avis, rendez-vous dans votre espace membre.</p>
-            <a href="{{ route('membre.dashboard') }}#create-avis" class="btn btn-success">Aller à mon espace</a>
+            @if(auth()->user()->estMembre())
+              <h3 class="h5 mb-3">Laisser un avis</h3>
+              <p class="text-muted">Pour publier un avis, rendez-vous dans votre espace membre.</p>
+              <a href="{{ route('membre.dashboard') }}#create-avis" class="btn btn-success">Aller à mon espace</a>
+            @elseif(auth()->user()->estAdmin())
+              <h3 class="h5 mb-3">Consulter les différents avis dans votre tableau de bord administrateur</h3>
+              <a href="{{ route('admin.dashboard') }}" class="btn btn-success">Aller à mon espace</a>
+            @endif
           @else
             <h3 class="h5 mb-3">Laisser un avis</h3>
             <p class="text-muted">Vous devez être connecté pour publier un avis.</p>
