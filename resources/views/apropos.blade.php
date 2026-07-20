@@ -43,6 +43,7 @@
           <li><a href="{{ url('/') }}">Accueil</a></li>
           <li><a href="{{ url('/apropos') }}" class="active">À propos</a></li>
           <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
+          <li><a href="{{ route('partners.create') }}">Devenir partenaire</a></li>
           <li><a href="{{ url('/contact') }}">Contact</a></li>
           <li><a href="{{ route('avis.list') }}">Avis</a></li>
         </ul>

@@ -37,7 +37,7 @@
           <li><a href="{{ url('/') }}">Home</a></li>
           <li><a href="{{ url('/apropos') }}">About</a></li>
           <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
-          <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
+          <li><a href="{{ route('partners.create') }}">Devenir partenaire</a></li>
           <li><a href="{{ url('/contact') }}" class="active">Contact</a></li>
           <li><a href="{{ route('avis.list') }}">Avis</a></li>
         </ul>
