@@ -99,6 +99,9 @@
             <div class="d-flex flex-wrap gap-3">
               <a href="{{ route('wellbeing.programmes') }}" class="btn-get-started">Découvrir nos programmes</a>
               <a href="{{ route('wellbeing.programmes') }}" class="btn btn-outline-light">Voir les programmes</a>
+<button type="button" class="btn btn-light text-success fw-semibold" data-bs-toggle="modal" data-bs-target="#videoMembersModal">
+                Voir la vidéo
+              </button>
             </div>
           </div>
           <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
@@ -199,7 +202,7 @@
                 Georgette Indirah Mbinack Nsoga
               </p>
             </div>
-            <p>Well-Being s’appuie sur des valeurs de solidarité, d’écoute, d’engagement et de proximité pour créer un environnement favorable au bien-être de chacun, avec un objectif clair : devenir l’association de référence pour le bien-être à Kaélé et au-delà.</p>
+            <p>Well-Being s’appuie sur des valeurs de solidarité, d’écoute, d’engagement et de proximité pour créer un environnement favorable au bien-être de chacun, avec un objectif clair : devenir l’association de référence pour le bien-être à Maroua, Cameroun, et au-delà.</p>
             <a href="{{ url('/apropos') }}" class="read-more"><span>En savoir plus</span><i class="bi bi-arrow-right"></i></a>
           </div>
 
@@ -357,7 +360,7 @@
                 </div>
               </div><!-- End Info Item -->
 
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe src="https://www.google.com/maps?q=Centre%20d%27Etat%20Civil%20Kaele%20Maroua%20Cameroun&z=16&output=embed" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
 
@@ -393,6 +396,10 @@
                   <button type="submit">Envoyer</button>
                 </div>
 
+                <div class="col-md-12 text-center mt-3">
+                  <a href="{{ route('partners.create') }}" class="btn btn-outline-success">Devenir partenaire</a>
+                </div>
+
               </div>
             </form>
           </div><!-- End Contact Form -->
@@ -414,7 +421,7 @@
             <h4>Rejoignez notre newsletter</h4>
             <p>Abonnez-vous pour recevoir les dernières nouvelles de nos activités et programmes.</p>
             <form action="#" method="post" class="php-email-form">
-              <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+              <div class="sent-message">Votre demande d’abonnement a bien été envoyée. Merci !</div>
             </form>
           </div>
         </div>
@@ -428,10 +435,10 @@
             <span class="sitename">{{ config('app.name') }}</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
+            <p>Centre d’État Civil de Kaélé</p>
+            <p>Maroua, Cameroun</p>
+            <p class="mt-3"><strong>Téléphone :</strong> <span>À confirmer</span></p>
+            <p><strong>Email :</strong> <span>contact@wellbeing.org</span></p>
           </div>
         </div>
 
@@ -446,18 +453,18 @@
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Nos programmes</h4>
+          <h4>Programmes</h4>
           <ul>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Accompagnement bien-être</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Groupes de parole & entraide</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="#">Ateliers & sensibilisation</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Devenir partenaire</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('partners.create') }}">Devenir partenaire</a></li>
           </ul>
         </div>
 
         <div class="col-lg-4 col-md-12">
-          <h4>Suivez-nous</h4>
-          <p>Suivez notre actualité et nos actions sur les réseaux sociaux.</p>
+          <h4>Suivez Well-Being</h4>
+          <p>Restez informé de nos actions, événements et programmes.</p>
           <div class="social-links d-flex">
             <a href=""><i class="bi bi-twitter-x"></i></a>
             <a href=""><i class="bi bi-facebook"></i></a>
@@ -470,10 +477,26 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">{{ config('app.name') }}</strong> <span>All Rights Reserved</span></p>
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">{{ config('app.name') }}</strong> <span>Tous droits réservés</span></p>
     </div>
 
   </footer>
+
+  <div class="modal fade" id="videoMembersModal" tabindex="-1" aria-labelledby="videoMembersModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="videoMembersModalLabel">Les membres en action</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body">
+          <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Vidéo des membres en action" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

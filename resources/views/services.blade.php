@@ -9,8 +9,8 @@
   <meta name="keywords" content="services bien-être, coaching, santé, wellness">
 
   <!-- Favicons -->
-  <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+  <link href="{{ asset('logo/logo_well_being.jpeg') }}" rel="icon">
+  <link href="{{ asset('logo/logo_well_being.jpeg') }}" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -61,7 +61,7 @@
       <div class="container">
         <nav class="breadcrumbs">
           <ol>
-            <li><a href="{{ url('/') }}">Home</a></li>
+            <li><a href="{{ url('/') }}">Accueil</a></li>
             <li class="current">Programmes</li>
           </ol>
         </nav>

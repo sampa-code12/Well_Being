@@ -5,6 +5,8 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>{{ config('app.name') }} - Devenir partenaire</title>
   <meta name="description" content="Formulaire d'inscription des partenaires de Well-Being.">
+  <link href="{{ asset('logo/logo_well_being.jpeg') }}" rel="icon">
+  <link href="{{ asset('logo/logo_well_being.jpeg') }}" rel="apple-touch-icon">
   <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
@@ -97,6 +99,30 @@
 
                 <button type="submit" class="btn auth-btn w-100 mt-4">S’inscrire comme partenaire</button>
               </form>
+
+              <div class="mt-4 p-3 rounded-4 border border-warning-subtle bg-light">
+                <h5 class="fw-semibold mb-3">Paiements et transactions</h5>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-center gap-2 p-2 rounded-3 bg-white border">
+                      <img src="{{ asset('logo/mtn.png') }}" alt="MTN Mobile Money" width="40" height="40" style="object-fit:contain;">
+                      <div>
+                        <div class="fw-semibold">Mobile Money</div>
+                        <div class="text-muted small">+237 6XX XXX XXX</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="d-flex align-items-center gap-2 p-2 rounded-3 bg-white border">
+                      <img src="{{ asset('logo/orange.png') }}" alt="Orange Money" width="40" height="40" style="object-fit:contain;">
+                      <div>
+                        <div class="fw-semibold">Orange Money</div>
+                        <div class="text-muted small">+237 6XX XXX XXX</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

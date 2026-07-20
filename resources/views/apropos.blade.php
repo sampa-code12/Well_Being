@@ -9,8 +9,8 @@
   <meta name="keywords" content="à propos, bien-être, wellness, équipe">
 
   <!-- Favicons -->
-  <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+  <link href="{{ asset('logo/logo_well_being.jpeg') }}" rel="icon">
+  <link href="{{ asset('logo/logo_well_being.jpeg') }}" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -60,12 +60,7 @@
     <!-- Page Title -->
     <div class="page-title py-4 py-md-5" data-aos="fade">
       <div class="container">
-        <nav class="breadcrumbs" aria-label="Fil d’ariane">
-          <ol class="breadcrumb mb-3 justify-content-center justify-content-md-start">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}" class="text-decoration-none text-success">Accueil</a></li>
-            <li class="breadcrumb-item active text-white" aria-current="page">À propos</li>
-          </ol>
-        </nav>
+        
         <h1 class="display-6 fw-bold mb-2">À propos de Well-Being</h1>
         <p class="lead mb-0 text-white-50">Une association engagée pour le bien-être, la santé, la prévention et la solidarité.</p>
       </div>
@@ -86,7 +81,7 @@
             <div class="icon-box mb-3">
               <i class="bi bi-heart-pulse"></i>
               <h4>Objectif général</h4>
-              <p>Devenir l’association de référence à Kaélé pour le bien-être physique, mental et social, en touchant directement 5 000 personnes par an.</p>
+              <p>Devenir l’association de référence à Maroua, Cameroun, pour le bien-être physique, mental et social, en touchant directement 5 000 personnes par an.</p>
             </div>
             <div class="icon-box mb-3">
               <i class="bi bi-people"></i>
@@ -115,12 +110,7 @@
               <div class="card-body p-4 p-md-5">
                 <div class="d-flex flex-column flex-md-row align-items-md-start gap-4">
                   <div class="flex-shrink-0 w-100" style="max-width: 220px;">
-                    <div class="bg-light border rounded-4 d-flex align-items-center justify-content-center" style="min-height: 220px; border-style: dashed; border-width: 2px; border-color: #cfe8d8;">
-                      <div class="text-center text-muted px-3">
-                        <i class="bi bi-person-circle fs-1 d-block mb-2"></i>
-                        <span class="fw-semibold">Photo du fondateur</span>
-                      </div>
-                    </div>
+                    <img src="{{ asset('founder/aloys.jpg') }}" alt="Aloys Josias Tapiemene Tapondjou" class="img-fluid rounded-4 shadow-sm w-100" style="height: 220px; object-fit: cover;">
                   </div>
                   <div class="flex-grow-1">
                     <h3 class="h5 fw-bold text-success mb-3">Aloys Josias Tapiemene Tapondjou</h3>
@@ -212,8 +202,8 @@
         </div>
 
         <div class="col-lg-4 col-md-12">
-          <h4>Suivez-nous</h4>
-          <p>Suivez notre actualité et nos actions sur les réseaux sociaux.</p>
+          <h4>Suivez Well-Being</h4>
+          <p>Restez informé de nos actions, événements et programmes.</p>
           <div class="social-links d-flex">
             <a href=""><i class="bi bi-twitter-x"></i></a>
             <a href=""><i class="bi bi-facebook"></i></a>
@@ -226,9 +216,9 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">{{ config('app.name') }}</strong> <span>All Rights Reserved</span></p>
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">{{ config('app.name') }}</strong> <span>Tous droits réservés</span></p>
       <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> | <a href="https://bootstrapmade.com/tools/">DevTools</a>
+        Conçu avec <a href="https://bootstrapmade.com/">BootstrapMade</a> | <a href="https://bootstrapmade.com/tools/">DevTools</a>
       </div>
     </div>
 

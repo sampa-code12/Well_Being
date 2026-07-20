@@ -202,6 +202,7 @@ class AdminController extends Controller
             'services_visible' => SystemSetting::getBool('services_visible', true),
             'messages_enabled' => SystemSetting::getBool('messages_enabled', true),
             'avis_enabled' => SystemSetting::getBool('avis_enabled', true),
+            'whatsapp_support_number' => SystemSetting::getValue('whatsapp_support_number', config('services.whatsapp.support_number')),
         ];
 
         return view('admin.settings', compact('user', 'settings'));
@@ -216,11 +217,13 @@ class AdminController extends Controller
             'services_visible' => 'nullable|boolean',
             'messages_enabled' => 'nullable|boolean',
             'avis_enabled' => 'nullable|boolean',
+            'whatsapp_support_number' => 'nullable|string|max:255',
         ]);
 
         SystemSetting::setValue('services_visible', $request->boolean('services_visible') ? '1' : '0');
         SystemSetting::setValue('messages_enabled', $request->boolean('messages_enabled') ? '1' : '0');
         SystemSetting::setValue('avis_enabled', $request->boolean('avis_enabled') ? '1' : '0');
+        SystemSetting::setValue('whatsapp_support_number', $request->input('whatsapp_support_number'));
 
         return redirect()->route('admin.settings')->with('success', 'Paramètres système mis à jour.');
     }

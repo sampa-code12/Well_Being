@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
 
 class SystemSetting extends Model
 {
@@ -13,11 +14,21 @@ class SystemSetting extends Model
         'value',
     ];
 
+    protected static array $memorySettings = [];
+
     public static function getValue(string $key, $default = null)
     {
-        $setting = static::where('key', $key)->first();
+        if (!Schema::hasTable((new static)->getTable())) {
+            return static::$memorySettings[$key] ?? $default;
+        }
 
-        return $setting ? $setting->value : $default;
+        try {
+            $setting = static::where('key', $key)->first();
+
+            return $setting ? $setting->value : $default;
+        } catch (\Throwable $e) {
+            return static::$memorySettings[$key] ?? $default;
+        }
     }
 
     public static function getBool(string $key, bool $default = true): bool
@@ -29,9 +40,19 @@ class SystemSetting extends Model
 
     public static function setValue(string $key, $value): void
     {
-        static::updateOrCreate(
-            ['key' => $key],
-            ['value' => $value]
-        );
+        if (!Schema::hasTable((new static)->getTable())) {
+            static::$memorySettings[$key] = $value;
+
+            return;
+        }
+
+        try {
+            static::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        } catch (\Throwable $e) {
+            static::$memorySettings[$key] = $value;
+        }
     }
 }

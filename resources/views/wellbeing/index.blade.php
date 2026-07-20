@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Programmes Well-Being</title>
+    <link href="{{ asset('logo/logo_well_being.jpeg') }}" rel="icon">
+    <link href="{{ asset('logo/logo_well_being.jpeg') }}" rel="apple-touch-icon">
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <style>
@@ -21,12 +23,12 @@
             <div class="col-lg-8">
                 <span class="badge rounded-pill px-3 py-2 mb-3">Mission de Well-Being</span>
                 <h1 class="display-6 fw-bold mb-3">Programmes structurés autour des 5 axes de bien-être</h1>
-                <p class="lead mb-0">L’association Well-Being agit à Kaélé et sur l’ensemble du territoire national pour promouvoir le bien-être physique, mental, social et communautaire.</p>
+                <p class="lead mb-0">L’association Well-Being agit à Maroua, Cameroun, et sur l’ensemble du territoire national pour promouvoir le bien-être physique, mental, social et communautaire.</p>
             </div>
             <div class="col-lg-4">
                 <div class="card-soft p-4">
                     <h5 class="mb-3">Objectif global à 3 ans</h5>
-                    <p class="mb-0">Devenir l’association de référence à Kaélé pour le bien-être physique, mental et social et toucher directement 5 000 personnes par an.</p>
+                    <p class="mb-0">Devenir l’association de référence à Maroua, Cameroun, pour le bien-être physique, mental et social et toucher directement 5 000 personnes par an.</p>
                 </div>
             </div>
         </div>

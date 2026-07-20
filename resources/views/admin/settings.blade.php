@@ -110,6 +110,11 @@
                     <input class="form-check-input" type="checkbox" name="avis_enabled" id="avis_enabled" value="1" {{ old('avis_enabled', $settings['avis_enabled'] ?? true) ? 'checked' : '' }}>
                     <label class="form-check-label" for="avis_enabled">Autoriser les avis publics</label>
                 </div>
+                <div class="mb-3">
+                    <label for="whatsapp_support_number" class="form-label">Numéro WhatsApp de support</label>
+                    <input type="text" class="form-control" id="whatsapp_support_number" name="whatsapp_support_number" value="{{ old('whatsapp_support_number', $settings['whatsapp_support_number'] ?? '') }}" placeholder="237690000000">
+                    <div class="form-text">Ce numéro sera utilisé pour rediriger les messages de contact vers WhatsApp en production.</div>
+                </div>
                 <button type="submit" class="btn btn-success">Enregistrer les paramètres</button>
             </form>
         </div>

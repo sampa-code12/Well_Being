@@ -6,6 +6,8 @@
   <title>{{ config('app.name') }} - {{ $service->titre }}</title>
   <meta name="description" content="Découvrez plus en détail ce service proposé par Well-Being.">
 
+  <link href="{{ asset('logo/logo_well_being.jpeg') }}" rel="icon">
+  <link href="{{ asset('logo/logo_well_being.jpeg') }}" rel="apple-touch-icon">
   <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">

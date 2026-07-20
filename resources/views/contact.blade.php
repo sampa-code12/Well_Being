@@ -9,8 +9,8 @@
   <meta name="keywords" content="contact bien-être, wellness, support santé">
 
   <!-- Favicons -->
-  <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+  <link href="{{ asset('logo/logo_well_being.jpeg') }}" rel="icon">
+  <link href="{{ asset('logo/logo_well_being.jpeg') }}" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -34,8 +34,8 @@
       <a href="{{ url('/') }}" class="logo d-flex align-items-center me-auto"><img src="{{ asset('logo/logo_Well_Being.jpeg') }}" alt="{{ config('app.name') }} logo"><h1 class="sitename">{{ config('app.name') }}</h1></a>
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ url('/') }}">Home</a></li>
-          <li><a href="{{ url('/apropos') }}">About</a></li>
+          <li><a href="{{ url('/') }}">Accueil</a></li>
+          <li><a href="{{ url('/apropos') }}">À propos</a></li>
           <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
           <li><a href="{{ route('partners.create') }}">Devenir partenaire</a></li>
           <li><a href="{{ url('/contact') }}" class="active">Contact</a></li>
@@ -43,7 +43,7 @@
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-      <a class="btn-getstarted" href="{{ url('/contact') }}">Get Started</a>
+      <a class="btn-getstarted" href="{{ url('/contact') }}">Nous rejoindre</a>
     </div>
   </header>
 
@@ -85,7 +85,7 @@
                 </div>
               </div><!-- End Info Item -->
 
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe src="https://www.google.com/maps?q=Centre%20d%27Etat%20Civil%20Kaele%20Maroua%20Cameroun&z=16&output=embed" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
 
@@ -154,13 +154,13 @@
       <div class="container">
         <div class="row justify-content-center text-center">
           <div class="col-lg-6">
-            <h4>Join Our Newsletter</h4>
-            <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+            <h4>Rejoignez notre newsletter</h4>
+            <p>Abonnez-vous pour recevoir les dernières nouvelles sur nos activités et programmes.</p>
             <form action="{{ asset('forms/newsletter.php') }}" method="post" class="php-email-form">
-              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
-              <div class="loading">Loading</div>
+              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="S’abonner"></div>
+              <div class="loading">Chargement</div>
               <div class="error-message"></div>
-              <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+              <div class="sent-message">Votre demande d’abonnement a bien été envoyée. Merci !</div>
             </form>
           </div>
         </div>
@@ -174,36 +174,36 @@
             <span class="sitename">{{ config('app.name') }}</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-            <p><strong>Email:</strong> <span>info@example.com</span></p>
+            <p>Centre d’État Civil de Kaélé</p>
+            <p>Maroua, Cameroun</p>
+            <p class="mt-3"><strong>Téléphone :</strong> <span>À confirmer</span></p>
+            <p><strong>Email :</strong> <span>contact@wellbeing.org</span></p>
           </div>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Useful Links</h4>
+          <h4>Liens utiles</h4>
           <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/') }}">Home</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/apropos') }}">About us</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/') }}">Accueil</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/apropos') }}">À propos</a></li>
             <li><i class="bi bi-chevron-right"></i> <a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Conditions d’utilisation</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Our Services</h4>
+          <h4>Programmes</h4>
           <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Accompagnement bien-être</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Groupes de parole & entraide</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#">Ateliers & sensibilisation</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="{{ route('partners.create') }}">Devenir partenaire</a></li>
           </ul>
         </div>
 
         <div class="col-lg-4 col-md-12">
-          <h4>Follow Us</h4>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+          <h4>Suivez Well-Being</h4>
+          <p>Restez informé de nos actions, événements et programmes.</p>
           <div class="social-links d-flex">
             <a href=""><i class="bi bi-twitter-x"></i></a>
             <a href=""><i class="bi bi-facebook"></i></a>
@@ -216,9 +216,9 @@
     </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">{{ config('app.name') }}</strong> <span>All Rights Reserved</span></p>
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">{{ config('app.name') }}</strong> <span>Tous droits réservés</span></p>
       <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> | <a href="https://bootstrapmade.com/tools/">DevTools</a>
+        Conçu avec <a href="https://bootstrapmade.com/">BootstrapMade</a> | <a href="https://bootstrapmade.com/tools/">DevTools</a>
       </div>
     </div>
 

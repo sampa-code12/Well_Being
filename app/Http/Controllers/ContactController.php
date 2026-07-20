@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ContactSupportMail;
+use App\Models\SystemSetting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -24,20 +23,27 @@ class ContactController extends Controller
             'message.min' => 'Votre message doit contenir au moins 10 caractères.',
         ]);
 
-        $supportAddress = config('mail.from.address');
+        $supportNumber = SystemSetting::getValue('whatsapp_support_number');
 
-        if (blank($supportAddress) || !filter_var($supportAddress, FILTER_VALIDATE_EMAIL)) {
-            return back()->withErrors(['email' => 'L’adresse de support n’est pas configurée.'])->withInput();
+        if (blank($supportNumber)) {
+            $supportNumber = config('services.whatsapp.support_number');
         }
 
-        $mailable = new ContactSupportMail(
-            $validated['name'],
-            $validated['email'],
-            $validated['message'],
+        if (blank($supportNumber)) {
+            return back()->withErrors(['email' => 'Le numéro de support WhatsApp n’est pas configuré.'])->withInput();
+        }
+
+        $normalizedNumber = preg_replace('/\D/', '', (string) $supportNumber);
+
+        if (blank($normalizedNumber)) {
+            return back()->withErrors(['email' => 'Le numéro de support WhatsApp est invalide.'])->withInput();
+        }
+
+        $message = rawurlencode(
+            "Bonjour, je m'appelle {$validated['name']} ({$validated['email']}).\nSujet : {$validated['subject']}\n\n{$validated['message']}"
         );
 
-        Mail::to($supportAddress)->send($mailable);
-
-        return redirect()->route('contact')->with('success', 'Votre message a bien été envoyé. Nous vous répondrons rapidement.');
+        return redirect()->to("https://wa.me/{$normalizedNumber}?text={$message}")
+            ->with('success', 'Votre message a été préparé pour WhatsApp.');
     }
 }
