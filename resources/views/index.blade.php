@@ -43,6 +43,7 @@
           <li><a href="{{ url('/') }}" class="active">Accueil</a></li>
           <li><a href="{{ url('/apropos') }}">À propos</a></li>
           <li><a href="{{ route('wellbeing.programmes') }}">Programmes</a></li>
+          <li><a href="{{ route('partners.create') }}">Devenir partenaire</a></li>
           <li><a href="{{ url('/contact') }}">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -62,6 +63,25 @@
   </header>
 
   <main class="main">
+    @if (session('partner_success'))
+    <div class="modal fade" id="partnerSuccessModal" tabindex="-1" aria-labelledby="partnerSuccessModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title" id="partnerSuccessModalLabel">Inscription réussie</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-3">Merci pour votre engagement. Votre demande a bien été enregistrée.</p>
+            <p class="mb-0">Le lien du groupe WhatsApp sera communiqué très bientôt.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    @endif
 
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
@@ -71,6 +91,11 @@
           <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
             <h1>Bienvenue chez Well-Being</h1>
             <p>Des programmes d'accompagnement, de solidarité et de bien-être conçus pour vous aider à avancer sereinement.</p>
+            <div class="alert alert-warning border-0 shadow-sm mb-3" role="alert" style="max-width: 650px;">
+              <strong>FONDATEURS DE WELL-BEING :</strong><br>
+              <span class="fw-bold text-dark">ALOYS JOSIAS TAPIEMENE TAPONDJOU</span><br>
+              <span class="fw-bold text-dark">GEORGETTE INDIRAH MBINACK NSOGA</span>
+            </div>
             <div class="d-flex flex-wrap gap-3">
               <a href="{{ route('wellbeing.programmes') }}" class="btn-get-started">Découvrir nos programmes</a>
               <a href="{{ route('wellbeing.programmes') }}" class="btn btn-outline-light">Voir les programmes</a>
@@ -157,7 +182,7 @@
 
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
             <p>
-              Fondée par Aloys Josias Tapiemene Tapondjou et Georgette Indirah Mbinack Nsoga, l’association Well-Being travaille pour promouvoir le bien-être physique, mental, social et communautaire au Cameroun et au-delà. Sa mission est d’accompagner les jeunes, les familles et les communautés à travers des actions concrètes de prévention, d’éducation et de solidarité.
+              Fondée par <span class="fw-bold text-uppercase">Aloys Josias Tapiemene Tapondjou</span> et <span class="fw-bold text-uppercase">Georgette Indirah Mbinack Nsoga</span>, l’association Well-Being travaille pour promouvoir le bien-être physique, mental, social et communautaire au Cameroun et au-delà. Sa mission est d’accompagner les jeunes, les familles et les communautés à travers des actions concrètes de prévention, d’éducation et de solidarité.
             </p>
             <ul>
               <li><i class="bi bi-check2-circle"></i> <span>Des actions de santé, de prévention et d’écoute</span></li>
@@ -169,7 +194,7 @@
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
             <div class="p-3 rounded-4 border border-success-subtle bg-white bg-opacity-75 shadow-sm mb-3">
               <p class="mb-2 fw-semibold text-success">Fondateurs de Well-Being</p>
-              <p class="mb-0 fw-bold text-dark" style="font-size: 1.05rem; line-height: 1.7;">
+              <p class="mb-0 fw-bold text-dark text-uppercase" style="font-size: 1.05rem; line-height: 1.7;">
                 Aloys Josias Tapiemene Tapondjou<br>
                 Georgette Indirah Mbinack Nsoga
               </p>
@@ -468,6 +493,14 @@
 
   <!-- Main JS File -->
   <script src="{{ asset('assets/js/main.js') }}"></script>
+  @if (session('partner_success'))
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var modal = new bootstrap.Modal(document.getElementById('partnerSuccessModal'));
+      modal.show();
+    });
+  </script>
+  @endif
 
   <div class="chatbot-widget" id="chatbot-widget">
     <button class="chatbot-button" type="button" id="chatbot-toggle" aria-label="Open chatbot"><i class="bi bi-chat-dots"></i></button>

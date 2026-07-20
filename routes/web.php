@@ -6,6 +6,7 @@ use App\Http\Controllers\AvisController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\WellBeingController;
 use App\Services\WellBeingProgramService;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,9 @@ Route::get('/apropos', function () {
 });
 
 Route::get('/programmes', [WellBeingController::class, 'index'])->name('wellbeing.programmes');
+
+Route::get('/devenir-partenaire', [PartnerController::class, 'create'])->name('partners.create');
+Route::post('/devenir-partenaire', [PartnerController::class, 'store'])->name('partners.store');
 
 Route::get('/contact', function () {
     return view('contact');
