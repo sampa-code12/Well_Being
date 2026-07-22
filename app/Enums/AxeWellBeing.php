@@ -16,7 +16,7 @@ enum AxeWellBeing:string
             self::SANTE_PHYSIQUE => 'Santé physique',
             self::SANTE_MENTALE => 'Santé mentale',
             self::BIEN_ETRE_SOCIAL => 'Bien-être social',
-            self::EDUCATION_PREVENTION => 'Éducation et prévention',
+            self::EDUCATION_PREVENTION => 'Education',
             self::DEVELOPPEMENT_COMMUNAUTAIRE => 'Développement communautaire',
         };
     }

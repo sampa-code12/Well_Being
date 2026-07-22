@@ -15,7 +15,8 @@ class WellBeingController extends Controller
         $axes = $this->programService->axes();
         $objectives = $this->programService->objectives();
         $metrics = $this->programService->dashboardMetrics();
+        $globalObjective = $this->programService->globalObjective();
 
-        return view('wellbeing.index', compact('axes', 'objectives', 'metrics'));
+        return view('wellbeing.index', compact('axes', 'objectives', 'metrics', 'globalObjective'));
     }
 }

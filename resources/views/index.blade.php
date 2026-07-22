@@ -340,23 +340,31 @@
                 <i class="bi bi-geo-alt flex-shrink-0"></i>
                 <div>
                   <h3>Adresse</h3>
-                  <p><!-- [À CONFIRMER] Adresse réelle de l'association --></p>
+                  <p>Kaele-Maroua-Cameroun</p>
                 </div>
               </div><!-- End Info Item -->
 
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
                 <i class="bi bi-telephone flex-shrink-0"></i>
                 <div>
-                  <h3>Appelez-nous</h3>
-                  <p><!-- [À CONFIRMER] Téléphone réel de l'association --></p>
+                  <h3>Téléphone</h3>
+                  <p>+237 659 00 47 31</p>
                 </div>
               </div><!-- End Info Item -->
 
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+                <i class="bi bi-whatsapp flex-shrink-0"></i>
+                <div>
+                  <h3>WhatsApp</h3>
+                  <p>+237 659 00 47 31</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
                 <i class="bi bi-envelope flex-shrink-0"></i>
                 <div>
-                  <h3>Écrivez-nous</h3>
-                  <p><!-- [À CONFIRMER] Email réel de l'association --></p>
+                  <h3>Email</h3>
+                  <p>associationwellbeing@gmail.com</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -365,7 +373,8 @@
           </div>
 
           <div class="col-lg-7">
-            <form action="{{ asset('forms/contact.php') }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form action="{{ route('contact.store') }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+              @csrf
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -414,20 +423,6 @@
 
   <footer id="footer" class="footer">
 
-    <div class="footer-newsletter">
-      <div class="container">
-        <div class="row justify-content-center text-center">
-          <div class="col-lg-6">
-            <h4>Rejoignez notre newsletter</h4>
-            <p>Abonnez-vous pour recevoir les dernières nouvelles de nos activités et programmes.</p>
-            <form action="#" method="post" class="php-email-form">
-              <div class="sent-message">Votre demande d’abonnement a bien été envoyée. Merci !</div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
@@ -435,10 +430,11 @@
             <span class="sitename">{{ config('app.name') }}</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>Centre d’État Civil de Kaélé</p>
+            <p>Kaélé</p>
             <p>Maroua, Cameroun</p>
-            <p class="mt-3"><strong>Téléphone :</strong> <span>À confirmer</span></p>
-            <p><strong>Email :</strong> <span>contact@wellbeing.org</span></p>
+            <p class="mt-3"><strong>Téléphone :</strong> <span>+237 659 00 47 31</span></p>
+            <p><strong>WhatsApp :</strong> <span>+237 659 00 47 31</span></p>
+            <p><strong>Email :</strong> <span>associationwellbeing@gmail.com</span></p>
           </div>
         </div>
 
@@ -467,7 +463,7 @@
           <p>Restez informé de nos actions, événements et programmes.</p>
           <div class="social-links d-flex">
             <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61591147206178" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
             <a href=""><i class="bi bi-instagram"></i></a>
             <a href=""><i class="bi bi-linkedin"></i></a>
           </div>
@@ -525,29 +521,6 @@
   </script>
   @endif
 
-  <div class="chatbot-widget" id="chatbot-widget">
-    <button class="chatbot-button" type="button" id="chatbot-toggle" aria-label="Open chatbot"><i class="bi bi-chat-dots"></i></button>
-    <div class="chatbot-panel" id="chatbot-panel" aria-hidden="true">
-      <div class="chatbot-header">
-        <div>
-          <strong>{{ config('app.name') }} Chat</strong>
-          <p id="chatbot-subtitle">Assistant service client</p>
-        </div>
-        <button class="chatbot-close" type="button" id="chatbot-close" aria-label="Close chatbot">&times;</button>
-      </div>
-      <div class="chatbot-lang-actions">
-        <button type="button" class="chatbot-lang-btn active" data-lang="fr">FR</button>
-        <button type="button" class="chatbot-lang-btn" data-lang="en">EN</button>
-      </div>
-      <div class="chatbot-messages" id="chatbot-messages">
-        <div class="chatbot-message bot"><span id="chatbot-welcome">Bonjour ! Je suis votre assistant Well-Being. Veuillez choisir votre langue : 1 pour Français, 2 pour English.</span></div>
-      </div>
-      <form class="chatbot-form" id="chatbot-form">
-        <input id="chatbot-input" type="text" placeholder="Écrivez un message..." autocomplete="off">
-        <button type="submit">Envoyer</button>
-      </form>
-    </div>
-  </div>
 
 </body>
 

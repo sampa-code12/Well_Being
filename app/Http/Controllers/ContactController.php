@@ -40,10 +40,19 @@ class ContactController extends Controller
         }
 
         $message = rawurlencode(
-            "Bonjour, je m'appelle {$validated['name']} ({$validated['email']}).\nSujet : {$validated['subject']}\n\n{$validated['message']}"
+            "Bonjour, je m'appelle {$validated['name']} \nEmail : {$validated['email']} .\nSujet : {$validated['subject']}\n\n{$validated['message']}"
         );
 
-        return redirect()->to("https://wa.me/{$normalizedNumber}?text={$message}")
+        $waUrl = "https://wa.me/{$normalizedNumber}?text={$message}";
+
+        if ($request->ajax() || $request->expectsJson() || $request->header('X-Requested-With') === 'XMLHttpRequest') {
+            return response()->json([
+                'redirect' => $waUrl,
+                'message' => 'Votre message a été préparé pour WhatsApp.',
+            ]);
+        }
+
+        return redirect()->to($waUrl)
             ->with('success', 'Votre message a été préparé pour WhatsApp.');
     }
 }

@@ -80,7 +80,8 @@ Le projet est fonctionnel sur une base Laravel classique et présente déjà :
 - l’espace administrateur,
 - la gestion des avis,
 - la gestion des messages,
-- les paramètres système.
+- les paramètres système,
+- la configuration dynamique des programmes via `system_settings` et l’interface admin.
 
 Il reste toutefois des améliorations possibles sur :
 - la conformité UX des tableaux de bord,
@@ -117,7 +118,10 @@ Principaux contrôleurs :
   - gère les tableaux de bord admin,
   - affiche les statistiques,
   - récupère les avis/messages récents,
-  - gère les paramètres système.
+  - gère les paramètres système et la configuration dynamique des programmes.
+- [app/Http/Controllers/WellBeingController.php](../app/Http/Controllers/WellBeingController.php)
+  - gère la page programmes publique,
+  - récupère les axes, les objectifs et l’objectif global via le service métier.
 - [app/Http/Controllers/MemberController.php](../app/Http/Controllers/MemberController.php)
   - gère l’espace membre,
   - prépare les données du dashboard membre.
@@ -128,7 +132,10 @@ Principaux contrôleurs :
 Le service [app/Services/WellBeingProgramService.php](../app/Services/WellBeingProgramService.php) centralise :
 - la liste des axes du programme,
 - les objectifs associés,
+- l’objectif global configurable,
 - les métriques de tableau de bord.
+
+Ce service prend en charge l’accès aux paramètres dynamiques stockés dans `system_settings` pour que les programmes et l’objectif global soient modifiables depuis l’interface admin.
 
 Le but est d’éviter que la logique liée aux programmes ne soit dispersée dans les vues ou contrôleurs.
 

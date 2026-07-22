@@ -198,11 +198,16 @@ class AdminController extends Controller
         $user = Auth::user();
         abort_unless($user && $user->estAdmin(), 403);
 
+        $storedAxes = SystemSetting::getValue('wellbeing_axes', '[]');
+        $decodedAxes = json_decode($storedAxes, true);
+
         $settings = [
             'services_visible' => SystemSetting::getBool('services_visible', true),
             'messages_enabled' => SystemSetting::getBool('messages_enabled', true),
             'avis_enabled' => SystemSetting::getBool('avis_enabled', true),
             'whatsapp_support_number' => SystemSetting::getValue('whatsapp_support_number', config('services.whatsapp.support_number')),
+            'wellbeing_global_objective' => SystemSetting::getValue('wellbeing_global_objective', 'Devenir l’association de référence à Maroua, Cameroun, pour le bien-être physique, mental et social et toucher directement 5 000 personnes par an.'),
+            'wellbeing_axes' => is_array($decodedAxes) ? $decodedAxes : [],
         ];
 
         return view('admin.settings', compact('user', 'settings'));
@@ -218,12 +223,22 @@ class AdminController extends Controller
             'messages_enabled' => 'nullable|boolean',
             'avis_enabled' => 'nullable|boolean',
             'whatsapp_support_number' => 'nullable|string|max:255',
+            'wellbeing_global_objective' => 'nullable|string|max:1000',
+            'wellbeing_axes' => 'nullable|array',
+            'wellbeing_axes.*.label' => 'required_with:wellbeing_axes|string|max:255',
+            'wellbeing_axes.*.icon' => 'nullable|string|max:255',
+            'wellbeing_axes.*.description' => 'nullable|string',
+            'wellbeing_axes.*.objectives' => 'nullable|array',
+            'wellbeing_axes.*.objectives.*' => 'required_with:wellbeing_axes.*.objectives|string',
         ]);
 
+        $wellbeingAxes = $request->input('wellbeing_axes', []);
         SystemSetting::setValue('services_visible', $request->boolean('services_visible') ? '1' : '0');
         SystemSetting::setValue('messages_enabled', $request->boolean('messages_enabled') ? '1' : '0');
         SystemSetting::setValue('avis_enabled', $request->boolean('avis_enabled') ? '1' : '0');
         SystemSetting::setValue('whatsapp_support_number', $request->input('whatsapp_support_number'));
+        SystemSetting::setValue('wellbeing_global_objective', $request->input('wellbeing_global_objective'));
+        SystemSetting::setValue('wellbeing_axes', json_encode(array_values($wellbeingAxes), JSON_UNESCAPED_UNICODE));
 
         return redirect()->route('admin.settings')->with('success', 'Paramètres système mis à jour.');
     }

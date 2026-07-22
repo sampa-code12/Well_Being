@@ -19,6 +19,15 @@
 <body>
 <header class="hero">
     <div class="container">
+        @php
+            $backUrl = url()->previous();
+            if (!$backUrl || $backUrl === url('/programmes') || $backUrl === url('/services') || $backUrl === url()->current()) {
+                $backUrl = url('/');
+            }
+        @endphp
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{{ $backUrl }}" class="btn btn-light btn-sm">Retour</a>
+        </div>
         <div class="row align-items-center gy-4">
             <div class="col-lg-8">
                 <span class="badge rounded-pill px-3 py-2 mb-3">Mission de Well-Being</span>
@@ -28,7 +37,7 @@
             <div class="col-lg-4">
                 <div class="card-soft p-4">
                     <h5 class="mb-3">Objectif global à 3 ans</h5>
-                    <p class="mb-0">Devenir l’association de référence à Maroua, Cameroun, pour le bien-être physique, mental et social et toucher directement 5 000 personnes par an.</p>
+                    <p class="mb-0">{{ $globalObjective }}</p>
                 </div>
             </div>
         </div>
@@ -49,12 +58,7 @@
                     <div class="h3 fw-bold mb-0">{{ $metrics['members'] }}</div>
                 </div>
             </div>
-            <div class="col-md-6 col-xl-3">
-                <div class="card-soft p-4 metric">
-                    <div class="text-muted small">Programmes en ligne</div>
-                    <div class="h3 fw-bold mb-0">{{ $metrics['services'] ?? 'pas encore disponible' }}</div>
-                </div>
-            </div>
+
             <div class="col-md-6 col-xl-3">
                 <div class="card-soft p-4 metric">
                     <div class="text-muted small">Progression cible annuelle</div>

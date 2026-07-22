@@ -23,21 +23,56 @@
             font-family: 'Open Sans', sans-serif;
             background: linear-gradient(135deg, #f8f6ef 0%, #f4efe7 100%);
             color: var(--text);
+            overflow-x: hidden;
         }
 
         .dashboard-shell {
             min-height: 100vh;
             display: flex;
+            width: 100%;
+            align-items: stretch;
         }
 
         .sidebar {
             width: 280px;
+            min-height: 100vh;
+            align-self: stretch;
             background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
             color: white;
             padding: 24px 18px;
             display: flex;
             flex-direction: column;
             gap: 16px;
+        }
+
+        .main-panel {
+            flex: 1;
+            padding: 24px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .panel-card.compact {
+            max-height: 420px;
+            overflow: hidden;
+        }
+
+        .panel-card.compact .list-group-flush {
+            max-height: 320px;
+            overflow-y: auto;
+        }
+
+        .panel-card.compact .list-group-item {
+            padding: 0.85rem 1rem;
+        }
+
+        .panel-card.compact h5 {
+            margin-bottom: 0.85rem;
+        }
+
+        .panel-card.compact .badge {
+            font-size: 0.8rem;
+            padding: 0.4rem 0.7rem;
         }
 
         .sidebar .brand {
@@ -142,7 +177,25 @@
 
         @media (max-width: 992px) {
             .dashboard-shell { flex-direction: column; }
-            .sidebar { width: 100%; }
+            .sidebar { width: 100%; min-height: auto; }
+            .main-panel { padding: 18px; }
+            .topbar { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .stat-card, .panel-card, .welcome-card, .profile-card { min-height: auto; }
+        }
+
+        @media (max-width: 768px) {
+            body { overflow-x: hidden; }
+            .sidebar { padding: 18px 16px; }
+            .main-panel { padding: 16px; }
+            .topbar { align-items: flex-start; }
+            .row.g-4 { margin-left: -8px; margin-right: -8px; }
+            .row.g-4 > [class*='col-'] { padding-left: 8px; padding-right: 8px; }
+            .panel-card.compact { max-height: none; }
+            .panel-card.compact .list-group-flush { max-height: 260px; }
+            .panel-card.compact .list-group-item { padding: 0.75rem 0.85rem; }
+            .stat-card { padding: 14px; }
+            .profile-card { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .dashboard-shell { gap: 0; }
         }
     </style>
 </head>
@@ -264,6 +317,17 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="mt-3 p-3 rounded-3 bg-white border border-success-subtle text-muted">
+                            <strong>Note :</strong> « Personnes touchées » est calculé à partir des données du site :
+                            <ul class="mb-0">
+                                <li>Membres × 20</li>
+                                <li>Programmes × 16</li>
+                                <li>Messages × 5</li>
+                                <li>Avis × 3</li>
+                            </ul>
+                            Le total est plafonné à 5 000 chaque année.
+                        </div>
+                    </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -301,7 +365,7 @@
 
             <div class="row g-4">
                 <div class="col-lg-7">
-                    <div class="panel-card">
+                    <div class="panel-card compact">
                         <h5 class="mb-3">Nouveaux utilisateurs</h5>
                         <div class="list-group list-group-flush">
                             @forelse($recentUsers as $recentUser)
@@ -319,7 +383,7 @@
                     </div>
                 </div>
                 <div class="col-lg-5">
-                    <div class="panel-card">
+                    <div class="panel-card compact">
                         <h5 class="mb-3">Derniers messages reçus</h5>
                         <div class="list-group list-group-flush">
                             @forelse($recentMessages as $recentMessage)

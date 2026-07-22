@@ -64,24 +64,32 @@
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
                 <i class="bi bi-geo-alt flex-shrink-0"></i>
                 <div>
-                  <h3>Address</h3>
-                  <p>A108 Adam Street, New York, NY 535022</p>
+                  <h3>Adresse</h3>
+                  <p>Kaélé-Maroua-Cameroun</p>
                 </div>
               </div><!-- End Info Item -->
 
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
                 <i class="bi bi-telephone flex-shrink-0"></i>
                 <div>
-                  <h3>Call Us</h3>
-                  <p>+1 5589 55488 55</p>
+                  <h3>Téléphone</h3>
+                  <p>+237 659 00 47 31</p>
                 </div>
               </div><!-- End Info Item -->
 
               <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+                <i class="bi bi-whatsapp flex-shrink-0"></i>
+                <div>
+                  <h3>WhatsApp</h3>
+                  <p>+237 659 00 47 31</p>
+                </div>
+              </div><!-- End Info Item -->
+
+              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
                 <i class="bi bi-envelope flex-shrink-0"></i>
                 <div>
-                  <h3>Email Us</h3>
-                  <p>info@example.com</p>
+                  <h3>Email</h3>
+                  <p>associationwellbeing@gmail.com</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -150,23 +158,6 @@
 
   <footer id="footer" class="footer">
 
-    <div class="footer-newsletter">
-      <div class="container">
-        <div class="row justify-content-center text-center">
-          <div class="col-lg-6">
-            <h4>Rejoignez notre newsletter</h4>
-            <p>Abonnez-vous pour recevoir les dernières nouvelles sur nos activités et programmes.</p>
-            <form action="{{ asset('forms/newsletter.php') }}" method="post" class="php-email-form">
-              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="S’abonner"></div>
-              <div class="loading">Chargement</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Votre demande d’abonnement a bien été envoyée. Merci !</div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
@@ -174,10 +165,11 @@
             <span class="sitename">{{ config('app.name') }}</span>
           </a>
           <div class="footer-contact pt-3">
-            <p>Centre d’État Civil de Kaélé</p>
+            <p>Kaélé</p>
             <p>Maroua, Cameroun</p>
-            <p class="mt-3"><strong>Téléphone :</strong> <span>À confirmer</span></p>
-            <p><strong>Email :</strong> <span>contact@wellbeing.org</span></p>
+            <p class="mt-3"><strong>Téléphone :</strong> <span>+237 659 00 47 31</span></p>
+            <p><strong>WhatsApp :</strong> <span>+237 659 00 47 31</span></p>
+            <p><strong>Email :</strong> <span>associationwellbeing@gmail.com</span></p>
           </div>
         </div>
 
@@ -206,7 +198,7 @@
           <p>Restez informé de nos actions, événements et programmes.</p>
           <div class="social-links d-flex">
             <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61591147206178" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a>
             <a href=""><i class="bi bi-instagram"></i></a>
             <a href=""><i class="bi bi-linkedin"></i></a>
           </div>
@@ -217,9 +209,7 @@
 
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">{{ config('app.name') }}</strong> <span>Tous droits réservés</span></p>
-      <div class="credits">
-        Conçu avec <a href="https://bootstrapmade.com/">BootstrapMade</a> | <a href="https://bootstrapmade.com/tools/">DevTools</a>
-      </div>
+      
     </div>
 
   </footer>
@@ -233,29 +223,6 @@
   <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('assets/js/main.js') }}"></script>
 
-  <div class="chatbot-widget" id="chatbot-widget">
-    <button class="chatbot-button" type="button" id="chatbot-toggle" aria-label="Open chatbot"><i class="bi bi-chat-dots"></i></button>
-    <div class="chatbot-panel" id="chatbot-panel" aria-hidden="true">
-      <div class="chatbot-header">
-        <div>
-          <strong>{{ config('app.name') }} Chat</strong>
-        </div>
-        <button class="chatbot-close" type="button" id="chatbot-close" aria-label="Close chatbot">&times;</button>
-      </div>
-      <p id="chatbot-subtitle">Assistant service client</p>
-      <div class="chatbot-lang-buttons">
-        <button type="button" class="chatbot-lang-btn active" data-lang="fr">FR</button>
-        <button type="button" class="chatbot-lang-btn" data-lang="en">EN</button>
-      </div>
-      <div class="chatbot-messages" id="chatbot-messages">
-        <div class="chatbot-message bot"><span id="chatbot-welcome">Bonjour ! Je suis votre assistant bien-être. Posez-moi une question.</span></div>
-      </div>
-      <form class="chatbot-form" id="chatbot-form">
-        <input id="chatbot-input" type="text" placeholder="Écrivez un message..." autocomplete="off">
-        <button type="submit">Envoyer</button>
-      </form>
-    </div>
-  </div>
 </body>
 
 </html>

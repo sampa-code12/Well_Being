@@ -5,71 +5,26 @@ namespace App\Services;
 use App\Enums\AxeWellBeing;
 use App\Models\Avis;
 use App\Models\Message;
+use App\Models\SystemSetting;
 use App\Models\User;
 
 class WellBeingProgramService
 {
+    private function getJsonSetting(string $key, array $default = []): array
+    {
+        $value = SystemSetting::getValue($key);
+
+        if (is_string($value)) {
+            $decoded = json_decode($value, true);
+            return is_array($decoded) ? $decoded : $default;
+        }
+
+        return is_array($value) ? $value : $default;
+    }
+
     public function axes(): array
     {
-        return collect(AxeWellBeing::all())->map(function (AxeWellBeing $axe) {
-            return match ($axe) {
-                AxeWellBeing::SANTE_PHYSIQUE => [
-                    'code' => $axe->value,
-                    'label' => $axe->label(),
-                    'icon' => $axe->icon(),
-                    'description' => 'Sensibilisation, dépistage gratuit et accès à l’eau potable et aux kits d’hygiène.',
-                    'objectives' => [
-                        'Sensibiliser les jeunes et familles aux bonnes pratiques d’hygiène et de nutrition.',
-                        'Organiser des journées de dépistage gratuit pour la tension, le diabète et le VIH.',
-                        'Faciliter l’accès à l’eau potable et aux kits d’hygiène dans les écoles et quartiers.',
-                    ],
-                ],
-                AxeWellBeing::SANTE_MENTALE => [
-                    'code' => $axe->value,
-                    'label' => $axe->label(),
-                    'icon' => $axe->icon(),
-                    'description' => 'Création d’espaces d’écoute, prévention du stress et formation de pairs-éducateurs.',
-                    'objectives' => [
-                        'Lutter contre le stress, l’anxiété et la dépression chez les jeunes de 5 à 15 ans.',
-                        'Créer des espaces d’écoute et de parole pour briser les tabous.',
-                        'Former des pairs-éducateurs à la gestion du stress et à la prévention du suicide.',
-                    ],
-                ],
-                AxeWellBeing::BIEN_ETRE_SOCIAL => [
-                    'code' => $axe->value,
-                    'label' => $axe->label(),
-                    'icon' => $axe->icon(),
-                    'description' => 'Cohésion sociale, autonomisation des femmes et lutte contre les violences basées sur le genre.',
-                    'objectives' => [
-                        'Promouvoir la cohésion sociale et la solidarité entre les communautés.',
-                        'Accompagner les femmes et jeunes filles dans leur autonomisation.',
-                        'Lutter contre les violences basées sur le genre et le harcèlement.',
-                    ],
-                ],
-                AxeWellBeing::EDUCATION_PREVENTION => [
-                    'code' => $axe->value,
-                    'label' => $axe->label(),
-                    'icon' => $axe->icon(),
-                    'description' => 'Éducation sanitaire, prévention des addictions et premiers secours.',
-                    'objectives' => [
-                        'Éduquer sur la santé sexuelle et reproductive en milieu scolaire.',
-                        'Sensibiliser aux dangers des addictions : drogue, alcool, réseaux sociaux.',
-                        'Former aux premiers secours et à la gestion des urgences.',
-                    ],
-                ],
-                AxeWellBeing::DEVELOPPEMENT_COMMUNAUTAIRE => [
-                    'code' => $axe->value,
-                    'label' => $axe->label(),
-                    'icon' => $axe->icon(),
-                    'description' => 'Mobilisation communautaire, partenariats institutionnels et activités sportives et culturelles.',
-                    'objectives' => [
-                        'Mobiliser la communauté de Kaélé autour des questions de bien-être.',
-                        'Créer des partenariats avec la Mairie, les CSI, les écoles et les autres ONG.',
-                        'Mettre en place des activités sportives, culturelles et de détente pour réduire le stress.',
-                    ],
-                ],
-            };
-        })->values()->all();
+        return $this->getJsonSetting('wellbeing_axes');
     }
 
     public function objectives(): array
@@ -87,6 +42,14 @@ class WellBeingProgramService
         }
 
         return $rows;
+    }
+
+    public function globalObjective(): string
+    {
+        return SystemSetting::getValue(
+            'wellbeing_global_objective',
+            'Devenir l’association de référence à Maroua, Cameroun, pour le bien-être physique, mental et social et toucher directement 5 000 personnes par an.'
+        );
     }
 
     public function dashboardMetrics(): array

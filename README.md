@@ -65,6 +65,7 @@ Le système permet de :
 - consultation des avis,
 - consultation des messages reçus,
 - gestion des paramètres système,
+- édition des axes de programme bien-être et de l’objectif global depuis le back-office,
 - gestion des utilisateurs.
 
 ---
@@ -205,6 +206,7 @@ http://127.0.0.1:8000
 | `/register-form` | formulaire d’inscription |
 | `/login` ou `/login-form` | connexion |
 | `/admin/dashboard` | tableau de bord administrateur |
+| `/admin/settings` | gestion des paramètres système et des programmes |
 | `/membre/dashboard` | tableau de bord membre |
 | `/avis` | consultation et publication des avis |
 
@@ -223,6 +225,8 @@ http://127.0.0.1:8000
 - les rôles déterminent l’accès aux espaces admin et membre,
 - les avis sont enregistrés avec un statut de modération,
 - l’admin peut activer ou désactiver certaines fonctionnalités système,
+- les programmes, les objectifs associés et l’objectif global sont stockés dynamiquement dans `system_settings`, ce qui permet de les modifier depuis l’interface admin,
+- le service `WellBeingProgramService` centralise la logique d’accès aux axes et aux métriques utilisées par les vues publiques,
 - les avis sont visibles sur la page publique selon leur statut.
 
 ---
@@ -234,7 +238,9 @@ Les vues sont organisées par contexte :
 - [resources/views/apropos.blade.php](resources/views/apropos.blade.php) : présentation de l’association
 - [resources/views/contact.blade.php](resources/views/contact.blade.php) : formulaire/contact
 - [resources/views/avis/list.blade.php](resources/views/avis/list.blade.php) : affichage des avis publics
+- [resources/views/wellbeing/index.blade.php](resources/views/wellbeing/index.blade.php) : page des programmes dynamiques
 - [resources/views/admin/dashboard.blade.php](resources/views/admin/dashboard.blade.php) : dashboard admin
+- [resources/views/admin/settings.blade.php](resources/views/admin/settings.blade.php) : gestion des paramètres système et des programmes
 - [resources/views/membre/dashboard.blade.php](resources/views/membre/dashboard.blade.php) : dashboard membre
 
 ---
@@ -258,6 +264,7 @@ Les vues sont organisées par contexte :
 
 ### Priorité haute
 - améliorer l’ergonomie du dashboard admin,
+- rendre le dashboard admin totalement responsive mobile,
 - remplacer certains éléments statiques par des composants Blade réutilisables,
 - renforcer la gestion de la modération des avis,
 - ajouter des tests automatisés sur les flux clés.
